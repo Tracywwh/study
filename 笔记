@@ -1,4 +1,22 @@
 一组javascript构建工具通常由：
-package管理器：yarn/npm；
+package管理器：yarn/npm； （npm下载的包会版本不一致，yarn不会）
 打包器：webpacket/parcel；
 编译器：babel
+
+
+常用命令行：
+sudo npm install yarn -g 
+Sudo yarn global add @vue/cli
+Sudo yarn global add @tarojs/cli
+
+github ssh
+gitlab http
+
+npm run dev:weapp   运行小程序
+
+提交命令行
+git add .  
+git commit -m ‘修改信息’
+Git push origin 
+
+git checkout ‘分支名’
