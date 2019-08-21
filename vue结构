@@ -1,0 +1,56 @@
+vue的结构：
+
+vue-router；vuex状态管理；axios请求；vant框架；
+
+node_modules
+src
+  =》api 
+    =》fetch.js 
+      request&reponse请求方法
+    =》api.js 接口
+    =》const.js 全局常量
+  =》assets静态资源
+    =》images
+    =》styles 全局样式
+  =》store 通讯
+    =》modules 各页面store
+    =》index.js导入所有store
+  =》utils公共方法
+  =》components组建
+    =》公用组建
+  =》views页面
+  router.js
+  .env.dev & .env.prod & .end.test
+  vue.config.js
+  
+  
+ 页面 —— 静态资源；页面；组建；
+ 功能 —— router；response&request请求；环境判断；store通讯
+ 
+ 生命周期：
+ beforeCreate(){}
+ Created(){}
+ beforeMount(){}
+ Mounted(){} 
+ beforeUpdate(){}
+ Updated(){}
+ beforeDestory(){}
+ destoryed(){}
+ 
+ 
+ data(){
+    return{
+    }
+ },
+ methods:{},
+ computed:{},
+ watch:{},
+ 
+ 
+ 
+ 
+ 
+ 
+  
+  
+  
