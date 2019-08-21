@@ -47,5 +47,8 @@ src
  watch:{},
  filters:{},
  
+router三种方式：hash；history；abstrat
+路由钩子：beforeEach；beforeResolve；afterEach；......
 
+父子通讯props；子父emit；
   
