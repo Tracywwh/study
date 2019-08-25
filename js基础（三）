@@ -1,0 +1,14 @@
+间歇调用和超时调用
+
+var timeoutId = setTimeout(function(){
+  alert('hello Tracy')
+},1000)
+
+clearTimeout（timeoutId）
+
+var timeoutInterval = setInterval(functin(){
+  alert('hello my hero')
+},1000)
+clearInterval(timeoutInterval)
+
+
