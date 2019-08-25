@@ -16,3 +16,40 @@ var sum = function(num1, num2){
 
 构造函数：
 var sum1 = new sum();
+
+
+函数和构造函数的区别：
+function createPerson(name, age, job){
+  var o = new object();
+  o.name = name;
+  o.age = age;
+  o.job = job;
+  o.sayName = function(){
+    alert(this.name) 
+  }
+  return o;
+}
+调用： var person = createPerson('Tracy',18,'Engineer')
+
+function Person(name, age, job){
+  this.name = name;
+  this.age = age;
+  this.job = job;
+  this.sayName = function(){
+    alert(this.name)
+  }
+}
+调用： var person = new Person('Tracy',18,'Engineer')
+
+两者的区别在于：
+1. 构造函数没有显示的创建对象
+2. 直接将属性和方法赋予给了this对象
+3. 没有return
+4. 构造函数首字母大写
+5. 创建实例必须要new操作符
+
+
+
+
+
+
