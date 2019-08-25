@@ -1,0 +1,53 @@
+window知识
+
+1. alert() 警告框
+
+2. confirm对话框  能获取到弹窗的确定还是取消操作
+if (confirm('xxx')){
+  alert('yes')
+}else{
+  alert('no')
+}
+
+3. prompt 提示框
+prompt('What's your name?', 'Tracy')
+
+4. window.print();
+
+5. window.find();
+
+location对象
+location即是window对象的属性，又是document对象的属性，window.location和document.location引用的是同一个对象
+
+hash路由： “#contents” 包含#号
+host      “www.smm.cn:8080”   返回服务器名称和端口号
+hotname   “www.smm.cn”        不带端口号的服务器名称
+href      “https://www.smm.cn”  完整url
+pathname  “/about”            url中的目录或文件名
+port      “：8080”            端口号，如果没有端口号，则返回空字符串
+protocol  “https:”            协议
+search    “?id=123”           查询字符串
+
+如何获取url中的参数？
+eg: https://hq.smm.cn/baike_keywords?page=5&size=10
+function getQueryStringArgs(){
+  let qs = location.search.length>0 ? location.search.substring(1) : ''
+   => page=5&size=10
+  let args = {}
+  let items = qs.length ? qs.split('&') : []
+  let item = null, name = null,value = null, i =0, len = items.length
+  for (i =0; i<len; i++){
+    item = items[i].split('=')
+    name = decodeURIComponent(item[0]);
+    value= decodeURIComponent(item[1]);
+    if(name.length){
+      args[name] = value
+    }
+  }
+  return args
+}
+=> [page:5,size:10]
+
+
+
+
