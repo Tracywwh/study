@@ -14,9 +14,14 @@ var sum = function(num1, num2){
 解析起会率先读取函数声明，并使其在执行任何代码之前可用。
 函数表达式，则必须等到解析器执行到它所在的代码行，才会真正被解释执行。
 
+举例说明：
+sayHi();
+function sayHi(){ alert('hi') }   // 能执行；因为函数声明提升
+var sayHi = function(){ alert('hi') }  // error，函数还不存在 
+
+
 构造函数：
 var sum1 = new sum();
-
 
 函数和构造函数的区别：
 function createPerson(name, age, job){
@@ -50,6 +55,28 @@ function Person(name, age, job){
 
 
 
+创建私有作用域，可以使用各自的变量，不必担心搞乱全局作用域；
+减少闭包占用内存的问题，因为没有指向匿名函数的引用。
+(function(){
+  var now = new Date()
+  if( now.getMonth() == 0 && now.getDate() == 1 ){
+    alert('happy new yaer')
+  }
+})();
 
+
+function MyObject(){
+  // 私有变量
+  var privateVariable = 10  
+  // 私有函数
+  function privateFunction(){
+    return false;
+  }
+  // 特权方法
+  this.publicMethod = function(){
+    privateVariable++;
+    return privateFunction();
+  }
+}
 
 
