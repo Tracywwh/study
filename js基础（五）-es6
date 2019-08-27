@@ -13,7 +13,7 @@ new Set('abcbbcd') => {'a','b','c','d'}
 
 
 set()实例的方法：
-add(); delete() 不添加重复的值
+add(); delete() 不添加重复的值,仅限于new Set()方可使用
 
 let num = new Set();
 num.add(3).add(1).add(3) => num: {3,1}   
@@ -22,9 +22,20 @@ num.delete(3) => num: {1}
 num.has(1) => true
 num.has(3) => false
 
+let set = ['red','blue','green']
+let arr = [...set]
+=> arr: ['red','blue','green']
+
+去重：
+let arr = [1,2,3,4,5,3,2,7,4,9]
+let unique = [...new Set(arr)]  => [1,2,3,4,5,7,9]
 
 
-
+let a = new Set([1,2,3,4]), b = new Set([3,4,5,6,7])
+let c = new Set([...a,...b])  并集 
+=> a: {1,2,3,4,5,6,7}
+let d = new Set([...a].filter(x=>b.has(x)))  交集
+=> d: {3,4}
 
 
 来源：http://es6.ruanyifeng.com/#docs/set-map
