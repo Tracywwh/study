@@ -38,4 +38,21 @@ let d = new Set([...a].filter(x=>b.has(x)))  交集
 => d: {3,4}
 
 
+promise()异步操作
+const promise = new promise(function(resolve,reject){
+  if(异步操作成功){
+    resolve(value);
+  }else{
+    reject(error);
+  }
+})
+
+promise.then(function(value){
+    // success
+},function(error){
+    // failure
+})
+
+
+
 来源：http://es6.ruanyifeng.com/#docs/set-map
