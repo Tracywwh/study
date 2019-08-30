@@ -1,6 +1,6 @@
 vue的结构：
 
-vue-router；vuex状态管理；axios请求；vant框架；
+vue-router；vuex状态管理；axios请求；vant ui框架；
 
 node_modules
 src
@@ -42,8 +42,13 @@ src
     return{
     }
  },
- methods:{},
- computed:{},
+ methods:{
+    ...mapActions()
+ },
+ computed:{
+    ...mapState({}),
+    ...mapGetters()
+ },
  watch:{},
  filters:{},
  
