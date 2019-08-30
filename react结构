@@ -1,0 +1,5 @@
+生命周期：
+initialization 组建初始化
+Mounting 组建的挂载,分为三阶段 componentWillMount,render, componentDidMount
+update 组建的更新 
+componentWillUnmount 卸载阶段
