@@ -20,3 +20,26 @@ git commit -m ‘修改信息’
 Git push origin 
 
 git checkout ‘分支名’
+
+git tag 查看所有tag q退出
+git tag tagname 新建tag
+git push origin tagname 把tag推送到远程
+
+git tag -d tagname 删除本地tag
+git push origin :tagname 将空tag推送到远程：删除远程tag
+
+A合并到B
+在B分支上，git merge A
+git push origin 推送到远程
+
+git clone 地址
+
+ls -al 查看.git
+rm -rf .git 删除.git文件：这是记录git操作和分支tag映射关系的，要删除后才能复制移动文件夹到其他目录下上传git上
+
+git上创建私有库，clone git地址，git客户端clone，在对应目录下上传项目文件。
+
+
+
+
+
