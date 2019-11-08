@@ -1,0 +1,12 @@
+页面栈 
+
+wx.nagigateTo 打开新页面，原页面保留；会增加页面栈，直到页面栈大小为5
+
+wx.redirectTo 页面重定向，关闭原页面，不能返回；比如登录页面；不会增加页面栈
+对于一些介绍性等不常用页面wx.redirectTo或wx.navigatrBack
+
+wx.navigateBack 返回；减少页面栈
+
+reLaunch 回首页
+
+tarBar 跳主导航页面
