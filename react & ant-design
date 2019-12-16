@@ -1,0 +1,20 @@
+https://ant.design/docs/react/use-with-create-react-app-cn
+
+安装node，node中有npm包管理工具 或 安装yarn
+
+yarn安装比npm安装版本更统一。
+
+安装：
+1. yarn create react-app antd-demo文件名
+2. 进入对应文件夹 cd antd-demo文件名
+3. 运行起来 yarn start
+4. 安装并引入antd 
+yarn add antd 
+在src/APP.js中引入，当然也可以在各自调用的页面中引入相应的组建模块   import { Button } from 'antd';
+在src/APP.js中引入antd.css   @import '~antd/dist/antd.css';
+
+5. yarn add babel-plugin-import 按需加载组建代码和样式的babel插件 
+6. 自定义主题需要用到less，可以引入customize-cra 中提供的less相关的函数累帮助加载less样式 yarn add less less-loader
+7. 使用Day.js替换momentjs优化打包大小  yarn add antd-dayjs-webpack-plugin
+
+
