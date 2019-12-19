@@ -1,0 +1,69 @@
+字符串的扩展
+
+1.字符的unicode表示法
+
+2. for...of 循环遍历，获取string的每个字符
+eg: for( let a of 'foo'){ console.log(a)}  => 'f' 'o' 'o'
+
+3. 直接输入 U+2028 和 U+2029 
+
+4. JSON.stringify()
+
+5. 模版字符串
+`This is &{name}`
+
+6. 模版编译
+<%...%>放置js代码，<%=...%>输出js表达式
+eg： 
+<ul>
+  <% for(let i=0; i<data.length; i++) { %>       放置js代码
+      <li><%= data.address[i] %></li>            输出js表达式
+  <% } %>
+</ul>
+
+7. 标签模版
+let a = 5; let b = 10;
+tag`Hello ${a+b} world ${a*b}` 等同于 tag(['Hello','world',''],15,50)
+这里的tag是一个函数，整个表达式的返回值，就是tag函数处理模版字符串后的返回值
+
+function tag(strArr,value1,value2){ ... } 等同于 function tag(strArr,...values){ ... }
+
+8. 模版字符串的限制
+
+
+
+字符串的新增方法
+
+1. String.fromCodePoint()
+
+2. String.raw()
+
+3. codePointAt()
+
+4. normalize()
+
+5. includes()返回boolean，表示是否找到了参数字符串;
+   startsWith()返回boolean，表示参数字符串是否在原字符串的头部; 
+   endsWith()返回boolean，表示参数字符串是否在原字符串的尾部
+eg: let s = 'Hello world !'
+    s.startsWith('Hello') => true
+    s.endsWidth('!')      => true
+    s.includes('o')       => true
+这三个方法都支持第二个参数，表示开始搜索的位置
+  s.startsWith('world',6) => true
+  
+6. repeat() 返回一个新字符串,如果是小数，会被取整
+  'x'.repeat(3)  => 'xxx'
+  
+7. padStart()字符串在头部补全;
+   padEnd()字符串在尾部补全；
+   'x'.padStart(5,'ab')  => 'ababx'
+   'x'.padEnd(5,'ab')    => 'xabab'
+
+8. trimStart() 消除字符串头部的空格，返回的是新的字符串;
+   trimEnd()   消除字符串尾部的控股，返回的是新字符串；
+   
+9. matchAll() 返回一个正则表达式在当前字符串的所有匹配   
+
+
+
