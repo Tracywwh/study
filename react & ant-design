@@ -1,5 +1,8 @@
 https://ant.design/docs/react/use-with-create-react-app-cn
 
+React全家桶：
+Redux状态管理，React-Router路由，umi打包工具，Ant-Design ui框架
+
 安装node，node中有npm包管理工具 或 安装yarn
 
 yarn安装比npm安装版本更统一。
