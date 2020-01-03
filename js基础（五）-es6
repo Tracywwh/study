@@ -70,5 +70,24 @@ promise.then(function(value){
 })
 
 
+new Promise(function(resolve,reject){
+}).then(res=>{
+}).catch(err=>{
+}).finally(function(){
+})
+
+promise.all([function action1(), function action2()]).then()
+用promise.all()如果一个成功，一个失败，all就直接进入catch（），不会渲染成功的那个接口，这时候用allSettled()
+promise.allSettled([fun1(),fun2()]).then(result => {
+  result.forEach( item => console.log(item.status) )  可以获取到接口里调用状态，成功的接口可以去渲染
+})
+
+async&await 是es7，与promise（）一样是处理异步的，但async&await更优雅。
+async function getData(){
+  await fun1()
+}
+
+
+
 
 来源：http://es6.ruanyifeng.com/#docs/set-map
