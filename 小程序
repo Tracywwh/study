@@ -48,5 +48,38 @@ wx.login(获取code) ===> wx.getUserInfo(用户授权) ===> 获取 unionid
 小程序分享出去的页面，因为微信场景值问题，第一次打开分享出去的页面可能会跳到微信首页。
 
 
+小程序使用的语法：
+原生语言 + vant-weapp 框架 + runtime.js解决异步
+taro + taro-ui 
+
+应用的生命周期：
+onLaunch: 小程序初始化完成时（全局只触发一次）
+onShow:   小程序开启或小程序从后台进入前台
+onHide:   小程序从前台进入后台，监听小程序隐藏
+onError:  监听错误
+onPageNotFound: 页面不存在
+
+前台：是指用户点击左上角关闭或者按了设备home离开微信，小程序没有直接销毁，而是进入了后台。
+
+
+页面的生命周期：
+Page({
+  data: {}, 页面初始数据
+  onLoad: function(options){}, 监听页面加载
+  onReady: function(){}, 监听页面初次渲染完成
+  onShow: function(){},  监听页面显示
+  onHide: function(){},  监听页面隐藏
+  onUnload: function(){}, 页面卸载
+  onPullDownRefresh: function(){}, 监听用户下拉动作
+  onReachBottom: function(){}, 上拉触底事件
+  onShareAppMessage: function(){}, 点击右上角转发
+  onPageScroll: function(){},  页面滚动触发事件
+  onResize: function(){}, 尺寸改变时触发
+  getData(){  事件函数
+    this.setData({xxx}) 同步
+  }
+  
+})
+
 
 
