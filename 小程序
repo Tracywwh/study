@@ -49,9 +49,10 @@ wx.login(获取code) ===> wx.getUserInfo(用户授权) ===> 获取 unionid
 
 
 小程序使用的语法：
-原生语言 + vant-weapp 框架 + runtime.js解决异步
-taro + taro-ui 
+1. 原生语言 + vant-weapp 框架 + runtime.js解决异步
+2. taro + taro-ui 
 
+----------------------------  原生+vant-weapp+runtimejs ----------------------------
 应用的生命周期：
 onLaunch: 小程序初始化完成时（全局只触发一次）
 onShow:   小程序开启或小程序从后台进入前台
@@ -78,8 +79,27 @@ Page({
   getData(){  事件函数
     this.setData({xxx}) 同步
   }
-  
 })
+
+---------------------------- taro + taro-ui  ----------------------------
+页面的生命周期：
+componentWillMount 对应小程序的onLoad
+componentDidMount  对应小程序的onReady
+componentDidShow   对应小程序的onShow
+componentDidHide   对应小程序的onHide
+componentDidCatchError 对应onError
+componentDidNotFound   对应小程序的onPageNotFound
+shouldComponentUpdate  页面是否需要更新
+componentWillUpdate    页面即将更新
+componentDidUpdate     页面更新完毕
+componentWillUnmount   页面退出；对应小程序的onUnload
+
+vant-weapp和taro-ui的区别：
+vant-weapp需要引入处理异步的runtimejs； taro自带@tarojs/async-await
+数据渲染方式不同，前者使用wx:for方式，后者使用map
+数据获取，后者使用redux状态管理包
+
+安装和创建项目均在ui框架文档中。
 
 
 
