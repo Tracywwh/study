@@ -1,0 +1,33 @@
+MVC模式
+
+Model模型层；
+View 视图层；
+Controller 控制层；
+
+举例解释：当用户点击View视图的登录按钮，系统会调用controller控制层里的登录接口。一般在controller层中不会写很多具体的业务逻辑代码，
+只会写一个接口方法，该方法具体的逻辑在service层进行实现，然后service层里的具体逻辑就会调用model模型，从而达到动态化的效果。
+
+
+MVVM（数据双向绑定）
+Model - 数据模型，简单的js对象
+VM（ViewModel）- 视图模型，链接Model与View
+View - 视图层，呈现给用户的dom渲染界面
+
+VM的作用：对View中dom元素的监听和对model中的数据进行绑定，当View变化会引起modal中数据的改动，model中数据的改动会触发
+view视图重新渲染，从而达到数据双向绑定的效果。
+
+
+常见库实现数据双向绑定的做法：
+发布订阅模式（Backbone.js）
+脏值检查（Angular.js）
+数据劫持（Vue.js）
+
+
+
+
+
+
+
+
+
+
