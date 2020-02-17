@@ -42,4 +42,16 @@ git上创建私有库，clone git地址，git客户端clone，在对应目录下
 
 
 
+安装typescript
+npm install -g typescript 安装ts
+tsc xxx.ts   编译ts 或 在vscode中设置：1)命令行tsc --init生成tsconfig.json 改 “outDir":"./js"   2)任务-运行任务-监视tsconfig.json
+
+typescript优势：
+1. 支持es6规范
+2. 强大的IDE支持（语法提示）
+3. Angular2的开发语言
+
+
+
+
 
