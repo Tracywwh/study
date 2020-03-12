@@ -81,7 +81,9 @@ Page({
   }
 })
 
----------------------------- taro + taro-ui  ----------------------------
+---------------------------- taro + taro-ui + redux + redux-thunk(异步) + less/sass  ----------------------------
+taro可直接使用px，会自动编译成rpx；而原生语法需要用rpx
+
 页面的生命周期：
 componentWillMount 对应小程序的onLoad
 componentDidMount  对应小程序的onReady
