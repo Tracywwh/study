@@ -19,6 +19,19 @@ UnionId 是一个用户对于同主体微信小程序/公众号/App的标识，�
 
 wx.login(获取code) ===> wx.getUserInfo(用户授权) ===> 获取 unionid
 
+小程序授权使用中的遇到的说明：
+需要出现授权弹窗的就必须要用<button open-type='' getuserInfo=''>
+手机号登录：
+手机号验证获取openid： 进入页面就去获取jscode（wx.login(res=>{ res就是jscode })）
+微信用户信息授权： <button open-type='' getUserInfo='xxx'>  xxx(e){ console.log(e就是授权后获取到的用户信息) }  
+
+微信授权登录： 需要获取sessionkey，后端才能解析手机号
+进入页面获取jscode（wx.login(res=>{res})），jscode传给后端去解析手机号，返回uuid
+点击获取微信授权： <button open-type='getPhoneNumber' ...> getPhoneNumber(e){ e就是授权后获取到的信息：iv, encryptedData }
+将获取到的uuid，iv, encryptedData 传给后端登录
+
+
+
 小程序开发存在的一些问题：
 1. 不支持css预编译器
 2. 不支持es7等后续的js特性，async await等特性都无法直接使用，需要引入runtimejs解决
@@ -83,6 +96,13 @@ Page({
 
 ---------------------------- taro + taro-ui + redux + redux-thunk(异步) + less/sass  ----------------------------
 taro可直接使用px，会自动编译成rpx；而原生语法需要用rpx
+
+taro 2.0版本需要注意写法的升级：
+1. class xxx taro.Component{}  export default xxx    用export const / export class 的方式，不使用module.export了
+2. 异步处理： 需要安装包： https://taro-docs.jd.com/taro/docs/migrate-to-2.html taro的升级指南在此
+3. 使用sass，在config中要引入，此处为坑！！！！！
+
+
 
 页面的生命周期：
 componentWillMount 对应小程序的onLoad
