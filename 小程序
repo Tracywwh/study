@@ -22,11 +22,12 @@ wx.login(获取code) ===> wx.getUserInfo(用户授权) ===> 获取 unionid
 小程序授权使用中的遇到的说明：
 需要出现授权弹窗的就必须要用<button open-type='' getuserInfo=''>
 手机号登录：
-手机号验证获取openid： 进入页面就去获取jscode（wx.login(res=>{ res就是jscode })）
+手机号验证获取openid： 点击获取验证码时先去获取jscode（wx.login(res=>{ res就是jscode })），有异步缘故，所以每次点击验证码时都能获取到最新的jscode
 微信用户信息授权： <button open-type='' getUserInfo='xxx'>  xxx(e){ console.log(e就是授权后获取到的用户信息) }  
 
 微信授权登录： 需要获取sessionkey，后端才能解析手机号
-进入页面获取jscode（wx.login(res=>{res})），jscode传给后端去解析手机号，返回uuid
+进入页面获取jscode（wx.login(res=>{res})），jscode传给后端去解析手机号，返回uuid，如果解析失败，catch(err=>重新获取jscode)；
+失败后要重新获取jscode，否则jscode会重复使用导致解析失败。
 点击获取微信授权： <button open-type='getPhoneNumber' ...> getPhoneNumber(e){ e就是授权后获取到的信息：iv, encryptedData }
 将获取到的uuid，iv, encryptedData 传给后端登录
 
