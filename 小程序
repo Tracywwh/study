@@ -103,6 +103,18 @@ taro 2.0版本需要注意写法的升级：
 2. 异步处理： 需要安装包： https://taro-docs.jd.com/taro/docs/migrate-to-2.html taro的升级指南在此
 3. 使用sass，在config中要引入，此处为坑！！！！！
 
+结构：
+config =》 devjs & indexjs & prodjs 自动生成环境
+src    =》 actions => 各自对应的接口调用
+       =》 constants => api 接口
+       =》 images
+       =》 pages 页面
+       =》 reducers => 各接口传出的类型
+       =》 store redux管理
+       =》 styles 公共css
+       =》 utils => fetch & utils & reduxjs
+       
+
 
 
 页面的生命周期：
