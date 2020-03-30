@@ -63,8 +63,12 @@ wx.login(获取code) ===> wx.getUserInfo(用户授权) ===> 获取 unionid
 
 
 小程序使用的语法：
-1. 原生语言 + vant-weapp 框架 + runtime.js解决异步
-2. taro + taro-ui 
+1. 原生语言 + vant-weapp 框架 + runtime.js解决异步    
+2. taro + taro-ui + redux （taro中会默认带上router）
+*小程序不能直接使用vue！！小程序与vue无关哈，别多想！！
+
+h5+vue+router
+
 
 ----------------------------  原生+vant-weapp+runtimejs ----------------------------
 应用的生命周期：
