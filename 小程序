@@ -67,7 +67,7 @@ wx.login(获取code) ===> wx.getUserInfo(用户授权) ===> 获取 unionid
 2. taro + taro-ui + redux （taro中会默认带上router）
 *小程序不能直接使用vue！！小程序与vue无关哈，别多想！！
 
-h5+vue+router
+h5+vue+router+axios(状态管理)
 
 
 ----------------------------  原生+vant-weapp+runtimejs ----------------------------
