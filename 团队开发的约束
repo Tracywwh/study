@@ -1,0 +1,29 @@
+团队开发，代码如何约束
+
+1. 格式规范：
+   安装eslint去辅助检测，规则集需要统一集中配置，继承一些优秀的开源代码规范，并使用rules做一些自己团队的规则补充
+2. 开发环境，生产环境与警告： 
+   开发过程中需要console查看打印以及报错信息的查看，但生产环境上不需要。
+   解决方式1. 把eslint的规则校验都设置为warn，会将所有打印变成警告显示。 在ci中设置环境变量ci=true，如此在ci中即使有警告也无法交付。
+   解决方式2. 如果使用了webpack，结合eslint-loader解决就更简单了。 webpack中根据当前环境的环境变量配置emitWarning: true。
+   
+ 第一层约束： IDE(集成开发环境)
+   安装eslint，配合eslint-loader，实时提示
+   
+ 第二层约束： Git Hooks实现自动化
+   git自身包含许多hooks,在commit,push等git时间前后触发执行，与pre-commit hook结合可以帮助校验Link，如果非通过代码规范则不允许提交
+   husky是一个使git hooks变得更简单的工具，只需配置几行package.json就可以。
+  
+ 第三层约束： CI
+   CI实在服务端校验的，使用gitlab CI做持续集成，配置文件即可
+   
+   
+ 小结：
+ 1. 代码规范统一
+ 2. 使用成熟的eslint config，并做细节修改
+ 3. 设置eslint rule为警告，保障开发体验，并在pre-commit与CI中把警告视为不通过，保证严格的代码规范
+ 4. 可以在IDE（vscode），git hooks，CI中添加规范校验拦截  ---------- （vscode的设置，git的命令操作）
+ 5. husky与lint-staged很方便地做关于lint的git hooks
+ 6. git hooks的规范校验可以通过git commit -n跳过，需要在CI曾继续加强校验
+   
+   
