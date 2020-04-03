@@ -2,6 +2,8 @@ vue的结构：
 
 vue-router；vuex状态管理；axios请求；vant ui框架；
 
+vue能做到精确更新，只会更新收集依赖的当前组建，不会捕获未更新的组建或是自组建。
+
 node_modules
 src
   =》api 
