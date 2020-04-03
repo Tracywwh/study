@@ -25,5 +25,19 @@
  4. 可以在IDE（vscode），git hooks，CI中添加规范校验拦截  ---------- （vscode的设置，git的命令操作）
  5. husky与lint-staged很方便地做关于lint的git hooks
  6. git hooks的规范校验可以通过git commit -n跳过，需要在CI曾继续加强校验
+ 
+ 
+ 
+ 具体的规范约束可以有：
+ const，let 代替var；
+ 空格规范；
+ 命名规范；
+ 减少闭包的使用；
+ images压缩；
+ 
+ 
+ 
+ 
+ 
    
    
