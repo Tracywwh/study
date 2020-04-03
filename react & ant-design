@@ -1,5 +1,11 @@
 https://ant.design/docs/react/use-with-create-react-app-cn
 
+react更新机制： 
+自顶向下更新递归机制，如果一个子组建更新了，里面嵌套了多层子元素，那也会重新渲染。
+这是性能上的灾难，所以react创造了Fiber，创造了处理异步，拯救这个缺陷。
+
+
+
 React全家桶：
 Redux状态管理，React-Router路由，umi打包工具，Ant-Design ui框架
 
