@@ -1,0 +1,5 @@
+wx.request  小程序
+$.get/$.post  jquery请求
+axios        http请求
+fetch        http请求，除了小程序都能用
+request      http请求
