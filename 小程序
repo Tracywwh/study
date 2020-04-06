@@ -65,6 +65,7 @@ wx.login(获取code) ===> wx.getUserInfo(用户授权) ===> 获取 unionid
 小程序使用的语法：
 1. 原生语言 + vant-weapp 框架 + runtime.js解决异步    
 2. taro + taro-ui + redux （taro中会默认带上router）
+3. uni-app 的ui库没有dom操作的，所以不推荐使用这种方式，uni-app也可以转到多平台小程序。
 *小程序不能直接使用vue！！小程序与vue无关哈，别多想！！
 
 h5使用vue框架
