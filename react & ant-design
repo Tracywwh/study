@@ -4,6 +4,12 @@ react更新机制：
 自顶向下更新递归机制，如果一个子组建更新了，里面嵌套了多层子元素，那也会重新渲染。
 这是性能上的灾难，所以react创造了Fiber，创造了处理异步，拯救这个缺陷。
 
+constructor(props){
+  this.super(props)
+}
+这个是为了在函数中使用this.props.dispatchXXX()
+因为在生命周期中，是可以使用this.props的，但在生命周期外的函数是无法直接使用this.props的，所以要constructor
+
 
 
 React全家桶：
