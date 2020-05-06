@@ -33,3 +33,25 @@ yarn add antd
 7. 使用Day.js替换momentjs优化打包大小  yarn add antd-dayjs-webpack-plugin
 
 
+
+Fragment 空标签
+<></>    空标签
+<Block></Block> 空标签
+
+
+容器组建符合“单一责任原则”，一个组建负责外观，另一个组建负责数据
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
