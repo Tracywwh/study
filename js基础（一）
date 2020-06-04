@@ -63,3 +63,48 @@ b.split('&')
 
 http://es6.ruanyifeng.com/#docs/destructuring
 
+
+
+
+
+
+`将对象拼装成字符串，保存到cookie中`
+
+let obj = { name: 'tracy', age: 19, address: 'pudong' }
+function obj2str(obj){
+    let a = ''
+    for( let i in obj ){
+      a += `&${i}=${obj[i]}`
+    }
+    a = a.slice(1)
+    console.log(a)
+}
+obj2str(obj)
+
+###将cookie 中字符串解析成对象
+let str = 'name=tracy&age=18&address=pudong'
+function str2obj(str){
+  let arr = str.split('&')
+  let c = {}
+  for( let item of arr ){
+     const [key, value] = item.split('=')
+     if( value !== '' ){
+      c[key] = value
+     }
+  }
+  console.log(c)
+}
+
+str2obj(str)
+
+
+
+
+
+
+
+
+
+
+
+
