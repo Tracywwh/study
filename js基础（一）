@@ -68,7 +68,7 @@ http://es6.ruanyifeng.com/#docs/destructuring
 
 
 
-`将对象拼装成字符串，保存到cookie中`
+### 将对象拼装成字符串，保存到cookie中
 
 let obj = { name: 'tracy', age: 19, address: 'pudong' }
 function obj2str(obj){
@@ -81,14 +81,16 @@ function obj2str(obj){
 }
 obj2str(obj)
 
-###将cookie 中字符串解析成对象
+
+### 将cookie 中字符串解析成对象
+
 let str = 'name=tracy&age=18&address=pudong'
 function str2obj(str){
-  let arr = str.split('&')
+  let arr = str.split('&')        切割&成数组：['name=tracy','age=18','address=pudong']
   let c = {}
   for( let item of arr ){
-     const [key, value] = item.split('=')
-     if( value !== '' ){
+     const [key, value] = item.split('=')     切割每项 ['name','tracy'] ['age','18'] ['address','pudong'] 数组重构
+     if( value !== '' ){ 
       c[key] = value
      }
   }
