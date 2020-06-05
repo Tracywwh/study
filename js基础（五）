@@ -1,0 +1,26 @@
+Math 计算
+
+### 获取随机数：
+function randomFrom(min,max){
+    switch( arguments.length ){
+      case 1:
+        return Math.random()*min+min;              
+        break;
+      case 2:
+        return Math.random()*(max-min)+min;
+        break;
+      default:
+        return 0;
+        break
+    }
+}
+randomFrom(10,20)
+
+如果要获取随机整数。parseInt和floor都是向下取整，所以要➕1， Math.random()*min+1+min; Math.random()*(max-min+1)+min
+
+
+Number(xxx).toFixed(2)    => 四舍五入获取保留2位的小数点
+
+
+
+
