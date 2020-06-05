@@ -1,0 +1,58 @@
+Date模块
+
+let now = new Date()
+now.getFullYear()
+xxx.getMonth()
+xxx.getDay()
+xxx.getDate()
+xxx.getHours()
+xxx.getMinutes()
+xxx.getSeconds()
+
+
+### 判断闰年
+function leapYear(){
+  ##  闰年是能被4整除且不能被100整除的，或能被400整除
+  let year = new Date().getFullYear()
+  if( year%4 == 0 && year%100 != 0 || year%400 == 0 ){
+    console.log('闰年')
+  }else{
+    console.log('平年')
+  }
+}
+
+
+
+### 获取往年某月的天数
+function mGetDate(year,month){
+  let d = new Date(year,month,0)  时间格式：月份是从0开始的，所以传进去的是2月，函数里其实是3月，0是往前倒推一月，即上个月的最后一天。
+  return d.getDate()
+}
+console.log(mGetDate(2020,2))  => 29
+
+
+### 两个时间段的时间差
+// 前5分钟，前1小时
+function getLastTime(){
+  let date=new Date();     //1. js获取当前时间
+  const min=date.getMinutes();  //2. 获取当前分钟
+  date.setMinutes(min-5);  //3. 设置当前时间-5分钟：把当前分钟数-5后的值重新设置为date对象的分钟数
+  let y = date.getFullYear();
+  let m = (date.getMonth() + 1) < 10 ? ("0" + (date.getMonth() + 1)) : (date.getMonth() + 1);
+  let d = date.getDate() < 10 ? ("0" + date.getDate()) : date.getDate();
+  let h = date.getHours() < 10 ? ('0' + date.getHours()) : date.getHours()
+  let f = date.getMinutes() < 10 ? ('0' + date.getMinutes()) : date.getMinutes()
+  let s = date.getSeconds() < 10 ? ('0' + date.getseconds()) : date.getSeconds()
+  let formatdate = y+'-'+m+'-'+d + " " + h + ":" + f + ":" + s;
+  console.log(formatdate)
+}
+getLastTime()
+
+
+
+
+
+
+
+
+
