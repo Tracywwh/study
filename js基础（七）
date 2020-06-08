@@ -1,13 +1,13 @@
 Date模块
 
 let now = new Date()
-now.getFullYear()
-xxx.getMonth()
-xxx.getDay()
-xxx.getDate()
-xxx.getHours()
-xxx.getMinutes()
-xxx.getSeconds()
+now.getFullYear()    => xxx.serFullYear()
+xxx.getMonth()       => xxx.setMonth()
+xxx.getDay()    
+xxx.getDate()        => xxx.setDate()
+xxx.getHours()       => xxx.setHours()
+xxx.getMinutes()     => xxx.setMinutes()
+xxx.getSeconds()     => xxx.setSeconds()
 
 
 ### 判断闰年
