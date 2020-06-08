@@ -1,7 +1,7 @@
 Date模块
 
 let now = new Date()
-now.getFullYear()    => xxx.serFullYear()
+now.getFullYear()    => xxx.setFullYear()
 xxx.getMonth()       => xxx.setMonth()
 xxx.getDay()    
 xxx.getDate()        => xxx.setDate()
