@@ -31,18 +31,22 @@ function mGetDate(year,month){
 console.log(mGetDate(2020,2))  => 29
 
 
-### 两个时间段的时间差
+// 判断时间是否要加0 
+function prepareTime(date){
+    return date > 10 ? date : '0'+date
+}
+### 获取前几分钟的时间
 // 前5分钟，前1小时
 function getLastTime(){
   let date=new Date();     //1. js获取当前时间
   const min=date.getMinutes();  //2. 获取当前分钟
   date.setMinutes(min-5);  //3. 设置当前时间-5分钟：把当前分钟数-5后的值重新设置为date对象的分钟数
   let y = date.getFullYear();
-  let m = (date.getMonth() + 1) < 10 ? ("0" + (date.getMonth() + 1)) : (date.getMonth() + 1);
-  let d = date.getDate() < 10 ? ("0" + date.getDate()) : date.getDate();
-  let h = date.getHours() < 10 ? ('0' + date.getHours()) : date.getHours()
-  let f = date.getMinutes() < 10 ? ('0' + date.getMinutes()) : date.getMinutes()
-  let s = date.getSeconds() < 10 ? ('0' + date.getseconds()) : date.getSeconds()
+  let m = prepareTime(date.getMonth() + 1);
+  let d = prepareTime（date.getDate()）;
+  let h = prepareTime(date.getHours()）
+  let f = prepareTime(date.getMinutes())
+  let s = prepareTime(date.getSeconds())
   let formatdate = y+'-'+m+'-'+d + " " + h + ":" + f + ":" + s;
   console.log(formatdate)
 }
@@ -50,6 +54,57 @@ getLastTime()
 
 
 
+### 两个时间段之差
+function dateNums(date1,date2){
+    let oDate1 = new Date(date1)
+    let oDate2 = new Date(date2)
+    let time = ''
+    if( oDate1.getTime() > oDate2.getTime() ){
+        console.log(`${date1}大`)
+        time = oDate1.getTime() - oDate2.getTime()
+    }else{
+      console.log(`${date2}大`)
+        time = oDate2.getTime() - oDate1.getTime()
+    }
+    let oDay = parseInt(time / (1000 * 60 * 60 * 24))
+    let oHour = parseInt( time % (1000*60*60*24)/(1000*60*60))       
+    let oMinute = parseInt( time % (1000*60*60)/(1000*60))    
+    let oSecond = parseInt( time % (1000*60)/(1000))    
+    console.log(`两个时间段之差: ${oDay}天, ${oHour}时, ${oMinute}分钟,${oSecond}秒`)
+}
+
+
+### 获取两个时间差： xx小时前/xx分钟前
+function compareTime(date1,date2){
+    let oDate1 = new Date(date1)
+    let oDate2 = new Date(date2)
+    let time = ''
+    if( oDate1.getTime() > oDate2.getTime() ){
+        console.log(`${date1}大`)
+        time = oDate1.getTime() - oDate2.getTime()
+    }else{
+      console.log(`${date2}大`)
+        time = oDate2.getTime() - oDate1.getTime()
+    }
+    let oDay = parseInt(time / (1000 * 60 * 60 * 24))
+    let oHour = parseInt( time % (1000*60*60*24)/(1000*60*60))       
+    let oMinute = parseInt( time % (1000*60*60)/(1000*60))    
+    let oSecond = parseInt( time % (1000*60)/(1000))    
+    console.log(`两个时间段之差: ${oDay}天, ${oHour}时, ${oMinute}分钟,${oSecond}秒`)
+    if(oDay>0){
+      return `${oDay}天前`
+    }
+    if(oHour>0){
+      return `${oHour}小时前`
+    }
+    if(oMinute>0){
+      return `${oMinute}分钟前`
+    }
+    if(oSecond>0){
+      return `${oSecond}秒前`
+    }
+}
+console.log(compareTime('2020-06-08 10:00:23','2020-06-08 09:20:33'))
 
 
 
