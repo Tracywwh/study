@@ -29,6 +29,15 @@ Array.isArray(a) => true
 a instanceof Array => true
 
 
+排序方式：
+function compare(a,b){
+    return a-b
+}
+a.sort(compare) => 正排序
+a.reverse()     => 倒序
+
+
+
 let b = '1234567'
 字符串原值不会变
 
