@@ -1,11 +1,12 @@
 function类型
 
-函数声明：
+一、函数声明：
 function sum(num1,num2){
   return num1 + num2
 }
 
-函数表达式：
+
+二、函数表达式：
 var sum = function(num1, num2){
   return num1 + num2
 };
@@ -20,7 +21,7 @@ function sayHi(){ alert('hi') }   // 能执行；因为函数声明提升
 var sayHi = function(){ alert('hi') }  // error，函数还不存在 
 
 
-构造函数：
+三、构造函数：
 var sum1 = new sum();
 
 函数和构造函数的区别：
@@ -54,11 +55,22 @@ function Person(name, age, job){
 5. 创建实例必须要new操作符
 
 
-箭头函数：
+四、箭头函数：
 没有this，所以不能使用apply，bind，call
 不能用过构造器，不能用new，会抛出错误
 yield不能在箭头函数中使用
 
+
+五、匿名函数
+属于函数表达式，在运行时动态生成的函数
+有如下缺点：
+1. 增加了调用的困难度
+2. 要调用自身时需要使用arguments.callee
+3. 可读性差
+
+
+六、闭包函数
+能在一个函数中调用另一个函数
 
 
 创建私有作用域，可以使用各自的变量，不必担心搞乱全局作用域；
