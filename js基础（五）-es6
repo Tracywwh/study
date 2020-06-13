@@ -21,7 +21,7 @@ Set和Map；
 源码： vue。element
 业务： vue。react，angular
 
-构建ES6的环境，构建工具：gulp，babel，webpack，npm；
+构建ES6的环境，构建工具：任务自动化（gulp），编译工具（babel，webpack），npm；
 基础语法；
 实战演练；
 
