@@ -1,3 +1,37 @@
+ES6的常用特性：
+
+默认参数： function hello(txt='hello world'){  }
+
+字符串模版： console.log(`hello ${name}`)
+
+解构赋值；
+
+箭头函数；
+
+Set和Map；
+
+异步操作： Promise
+
+类与对象；
+
+模块化；
+
+
+******基本技能*******
+源码： vue。element
+业务： vue。react，angular
+
+构建ES6的环境，构建工具：gulp，babel，webpack，npm；
+基础语法；
+实战演练；
+
+
+
+
+
+
+
+
 set() 类似于数组，但他的值都是唯一的。
 
 const s = new Set();
