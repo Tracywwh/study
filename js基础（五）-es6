@@ -12,7 +12,17 @@ eg： [a.b,...rest] = [1,2,3,4,5].  => a=1,b=2,c=3,4,5
 
 箭头函数；
 
-Set和Map；
+Set去重和Map；
+Set，WeakSet弱引用，必须是对象，不能遍历
+eg: let arr = new Set()
+arr.add(5);
+arr.add(7)
+console.log(arr.size) => 2     // new Set()的数组要获取个数，用size，相当于length
+arr.delete()
+arr.clear()
+arr.has()
+Map,WeakMap
+
 
 异步操作： Promise
 
