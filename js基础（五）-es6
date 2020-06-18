@@ -21,10 +21,17 @@ console.log(arr.size) => 2     // new Set()的数组要获取个数，用size，
 arr.delete()
 arr.clear()
 arr.has()
-Map,WeakMap
 
+Map,WeakMap弱引用，必须是对象
+let map1 = new Map()
+map1.set()
+map1.find()
+map1.delete()
 
 异步操作： Promise
+Promise.all([]).then();  数组中全部加载完了再执行
+promise.race([]).then(); 数组中某个快就先执行
+
 
 类与对象；
 
