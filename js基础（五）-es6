@@ -35,7 +35,9 @@ promise.race([]).then(); 数组中某个快就先执行
 
 类与对象；
 
-模块化；
+模块化：
+利用module进行多模块进行程序设计
+export&import
 
 
 ******基本技能*******
@@ -77,72 +79,11 @@ num.delete(3) => num: {1}
 num.has(1) => true
 num.has(3) => false
 
-let set = ['red','blue','green']
-let arr = [...set]
-=> arr: ['red','blue','green']
-
-去重：
-let arr = [1,2,3,4,5,3,2,7,4,9]
-let unique = [...new Set(arr)]  => [1,2,3,4,5,7,9]
-
-
-let a = new Set([1,2,3,4]), b = new Set([3,4,5,6,7])
-let c = new Set([...a,...b])  并集 
-=> a: {1,2,3,4,5,6,7}
-let d = new Set([...a].filter(x=>b.has(x)))  交集
-=> d: {3,4}
-
-
-WeakSet和Set相似，也是不重复的值的集合。但是，它与Set有2个不同，
-WeakSet的成员只能是对象，其次他的对象都是弱引用。
-
-因为垃圾回收机制依赖引用级数，如果一个值的引用次数不为0，垃圾回收机制就不会释放这块内存。
-结束使用该值之后，有时会忘记取消引用，导致内存无法释放，进而可能会引发内存泄漏。
-WeakSet里面的引用，不计入垃圾回收机制，所以不存在这个问题。
-WeakSet适合临时存放一组对象，以及存放跟对象绑定的信息。只要这些对象在外部小事，它在WeakSet里面的引用就会自动消失。
-||
-说白了就是值不被引用就不会被释放，容易内存泄漏。但WeakSet不走垃圾回收机制，没有泄漏的风险，所以它适合用于临时存放的对象。
-
-实例：
-const a = [[1,2],[3,4]]
-const ws = new WeakSet(a);  => {[1,2],[3,4]}
-
-
-
-promise()异步操作
-const promise = new promise(function(resolve,reject){
-  if(异步操作成功){
-    resolve(value);
-  }else{
-    reject(error);
-  }
-})
-
-promise.then(function(value){
-    // success
-},function(error){
-    // failure
-})
-
-
-new Promise(function(resolve,reject){
-}).then(res=>{
-}).catch(err=>{
-}).finally(function(){
-})
-
-promise.all([function action1(), function action2()]).then()
-用promise.all()如果一个成功，一个失败，all就直接进入catch（），不会渲染成功的那个接口，这时候用allSettled()
-promise.allSettled([fun1(),fun2()]).then(result => {
-  result.forEach( item => console.log(item.status) )  可以获取到接口里调用状态，成功的接口可以去渲染
-})
-
-async&await 是es7，与promise（）一样是处理异步的，但async&await更优雅。
-async function getData(){
-  await fun1()
-}
+let set = ['red','blue']
 
 
 
 
-来源：http://es6.ruanyifeng.com/#docs/set-map
+
+
+
