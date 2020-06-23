@@ -1,0 +1,34 @@
+六大数据类型：
+number,
+string,
+null,
+undefined,
+boolean,
+object =》[],{} 
+
+
+隐式转换：
+null === null 
+undefined ==== undefined 
+NaN != NaN
+new Object != new Object
+
+null == undefined  
+[] == false   => 将值转为0和1进行比较   Number([]) =>0  false => 0 
+![] == false 
+
+'23'+23 => 2323
+'23'-23 => 0
+'23' * 2 => 46
+
+
+
+
+
+
+
+
+
+
+
+
