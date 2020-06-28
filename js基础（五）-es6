@@ -21,6 +21,11 @@ console.log(arr.size) => 2     // new Set()的数组要获取个数，用size，
 arr.delete()
 arr.clear()
 arr.has()
+遍历方法：
+arr.keys()
+arr.values()
+arr.entries()
+arr.forEach()
 
 Map,WeakMap弱引用，必须是对象
 let map1 = new Map()
