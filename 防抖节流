@@ -26,7 +26,7 @@
            if( !canRun ) return 
            canRun = false
            setTimeout(()=>{
-               fn.apply(this,argument)
+               fn.apply(this,arguments)
                canRun = true
            },500)
         }
