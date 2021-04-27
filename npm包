@@ -1,0 +1,53 @@
+实用的npm软件包
+
+安装方式: yarn add xxx包
+使用： import { isEqual, cloneDeep } from 'lodash'
+
+1. lodash 是一套现代javascript实用程序库，提供模块化/性能与多种附加功能。可提供关于javascript数组、对象及其他数据结构的多种实用功能。
+
+2. qs 处理URL查询字符串，支持内嵌对象和数组。
+
+3. classnames 有条件地将类名组合在一起。
+import React from 'react'
+import classnames from 'classnames'
+import styles from './index.less'
+const Index = () => (<div className=classnames({styles.class1, styles.class2})></div>)
+
+4. numeral 是一个专门用来格式化数字的NPM库，同时numeral还能解析各种格式的数字
+numeral(10000.23).format('0,0'). => 10,000
+numeral(10000.234).format('$0,0.00') => 1,000.23
+
+5. cross-env 是一个运行跨平台设置和使用环境变量的脚本
+package.json 运行不同环境执行不同命令
+"scripts": {
+    "start": "cross-env REACT_APP_ENV=development webpack",
+    "build": "cross-env REACT_APP_ENV=production webpack",
+  }
+  
+6. path-to-regexp 用来处理url种地址与参数，能够很方便的得到我们想要的数据。
+ const pathToRegexp = require('path-to-regexp')
+ const url = '/user/:id/:name
+ const data = {id:10001, name: 'bob'}
+
+pathToRegexp.compile(url)(data)  => /user/10001/bob
+  
+  
+7. Day.js 快速且轻量化的Moment.js 
+
+
+8. ESLint可用来避免代码错误，规范化团队编码标准
+  
+9. stylelint一个强大的样式规则，可以让你强制执行样式规范，避免书写错误
+  
+10. uuid 一个便捷的微型软件包，能够快速生成更为复杂的通用唯一标识符 
+  
+11. faker.js 用于在浏览器及Node.js种生成大量假数据  
+  
+12. Mock.js 模拟数据生成器，可帮助前端开发和原型与后端进度分开，并减少某些单调性，尤其是在编写自动化测试时。  
+  
+13. Jest 一款便捷好用的Javascript测试框架，以简单为核心诉求。上手简易且功能丰富的api编写测试。  
+  
+  
+  
+  
+  
