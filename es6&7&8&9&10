@@ -1,0 +1,92 @@
+https://juejin.cn/post/6844903811622912014
+
+
+es6(2015)
+
+1. 类
+class xxx { }
+
+
+2. module模块化
+导出：export const name = 'Tracy'
+导入： import name from './name'
+
+
+3. 箭头函数 
+() => {}
+
+
+4. 函数参数默认值
+function foo(height=50, color='red'){ }
+
+
+5. 模版字符串
+const name = `My name is ${firstName} ${lastName}`
+
+
+6. 解构赋值
+const foo = ['one','two','three']
+const [first,second,third] = foo
+first  => 'one'
+second => 'two'
+third  => 'three'
+
+
+
+7. 延展操作符
+const objClone = { ...obj }
+
+
+8. 对象属性简写
+const name = 'Tracy', age='18'
+const student = {
+  name,
+  age
+}
+
+
+9. Promise异步编程
+
+
+10. let与const
+const定义常量； let定义变量
+
+
+
+
+es7(2016)
+1. Array.prototype.includes() 返回 true/false
+
+
+2. 指数操作符
+2**10  =》 1024 
+
+
+
+
+
+es8(2017)
+1. async/await 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
