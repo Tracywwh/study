@@ -91,16 +91,55 @@ String.prototype.padStart和String.prototype.padEnd ，允许将空字符串或�
 7. SharedArrayBuffer对象
 
 
+8. Atomics对象
 
 
 
 
 
+es9（2018）
+
+1. async/await
+
+2. Promise.finally()
+
+3. Rest/Spread属性
+
+4. 正则表达式命名捕获组
+
+5. 正则表达式反向断言
+
+6. 正则表达式dotAll模式
+
+7. 正则表达式Unicode转译
+
+8. 非转义序列的模版字符串
 
 
+es10（2019）
+1. 行分隔符
 
+2. 更加友好的JSON.stringify
 
+3. Array的flat()和flatMap()
 
+4. String的trimStart()和trimEnd()
+
+5. Object.fromEntries()
+
+6. Symbol.prototype.description
+
+7. String.protype.matchAll
+
+8. Function.prototype.toString
+
+9. 修改match绑定
+try{
+}catch{
+}
+
+10. 新的基本数据类型BigInt
+现在共有七种基本数据类型：string，number，boolean，null，undefined，symbol，bigInt
 
 
 
