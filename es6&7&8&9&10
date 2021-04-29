@@ -66,9 +66,29 @@ es7(2016)
 
 
 es8(2017)
-1. async/await 
+1. async/await 可以与for...of循环一起使用
+async function process(array){
+  for await( let i of array ){
+      doSomething(i)
+  }
+}
 
 
+2. Object.values()
+
+
+3. Object.entries()
+
+4. String padding 
+String.prototype.padStart和String.prototype.padEnd ，允许将空字符串或其他字符串添加到原始字符串的开头或结尾
+
+
+5. 函数参数列表结尾允许逗号
+
+6. Object.getOwnPropertyDescriptors()
+用来获取一个对戏那个的所有自身属性的描述符，如果没有任何自身属性，则返回空对象
+
+7. SharedArrayBuffer对象
 
 
 
