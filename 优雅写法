@@ -1,0 +1,76 @@
+原文链接： https://juejin.cn/post/6844903705058213896
+
+1. 替换条件写法
+if( xx ){
+  ...
+}else if(xx){
+  ...
+}else{
+  ...
+}
+
+
+switch(status){
+  case a:
+      xxx;
+      break;
+  case b:
+      xxx;
+      break;
+}
+
+
+优美写法一:
+const actions = {
+  '1': ['processing','IndexPage'],
+  '2': ['fail','FailPage'],
+   ...,
+  'default': ['other','Index']
+}
+const onButtonClick = (status) => {
+  let action = actions[status] || actions['default'],
+      logName = action[0],
+      pageName = action[1]
+  doName(logName)
+  jumpTo(pageName)
+}
+
+这种写法更清爽，将判断条件作为对象的属性名，将处理逻辑作为对象的属性值，在按钮点击的时候，通过对象属性查找的方法来进行逻辑判断，这种写法适合一元条件判断。
+
+
+
+优美写法二:
+const actions = newMap([
+  [1,['processing','IndexPage']],
+  [2,['fail','FailPage']],
+  ...,
+  ['default': ['other','Index']]
+])
+const onButtonClick = () => {
+   let action = actions.get(status) || actions.get('default'),
+      logName = action[0],
+      pageName = action[1]
+  doName(logName)
+  jumpTo(pageName)
+}
+
+
+以上是一元判断，若成为二元判断时，则如下情况，例：判断身份标识+状态
+const actions = new Map([
+  ['guest_1', () => { doSth... }],
+  ['guest_2', () => { doSth... }],
+  ['default', () => { doSth... }]
+])
+const onButtonClick = (identity, status) => {
+  let action = actions.get(`${identity}_${status}`) || actions.get('default')
+  action.call(this)
+}
+
+
+这个较实用，更高级的写法就不做记录了。
+
+
+
+
+
+
