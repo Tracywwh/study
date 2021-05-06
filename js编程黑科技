@@ -1,0 +1,58 @@
+1. 单行写一个五星评级的组建
+const rate = 2
+console.log("★★★★★☆☆☆☆☆".slice(5 - rate, 10 - rate))     =》 "★★☆☆☆"
+
+
+2. 匿名函数自执行
+( function(){}() );
+( function(){} )();
+~function(){}();
+!function(){}();
++function(){}();
+-function(){}();
+...
+
+3. 优雅取整
+const a = ~2.3332
+const b = 3.23 | 0
+const c = 2.31 >> 0
+
+
+4. 金额格式化
+var test1 = '1234567890'
+var format = test1.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+console.log(format) // 1,234,567,890
+
+
+5. 深拷贝
+const a = {
+  a: 1,
+  b: { c: 1, d: 2 }
+}
+const b = JSON.parse(JSON.stringify(a))
+
+
+6. 最大最小值
+const numbers = [1,23,43,76,34,863,230,0]
+Math.max.apply(Math,numbers)
+Math.min.apply(Math,numbers)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
