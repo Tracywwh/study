@@ -3,6 +3,7 @@
 防抖： 第一次触发，不会立即执行，而是给出一个时间值的延期（如500ms），在多次点击，会取消前一次的触发，唤起新的执行。
       效果： 也就是在短时间内多次操作，只执行最后一次。(前面的操作都被后一次的操作把定时器取消了，重新执行)
       实现原理：可借助闭包，通过计时器来执行函数。
+使用场景：输入框
       
       function debounce(fn){  // 传入的fn函数
           let timer = null;
@@ -20,6 +21,7 @@
       
 
 节流： 不管触发多少次，只要在n时间内，只执行一次。
+使用场景：鼠标不断点击触发，单位时间内只触发一次；监听滚动事件，比如滑到底部的加载更多。
       function throttle(){
         let canRun = true
         return function(){
@@ -35,15 +37,6 @@
           console.log(e.target.innerWidth)
       }
       window.addEventListener('resize',throttle(sayHello))
-
-
-
-
-
-
-
-
-
 
 
 
