@@ -74,3 +74,61 @@ const onButtonClick = (identity, status) => {
 
 
 
+2. 在原型链上添加属性实现继承
+
+写法一： 使用function的prototype通过修改原型链实现继承。写法繁琐。
+  function Person(name,age){
+    this.name = name
+    this.age = age
+  }
+  Person.prototype.addAge = functioin(){
+    this.age++
+  }
+  Person.prototype.setName = function(name){
+    this.name = name
+  }
+
+写法二：使用es6的class，通过extends关键字实现继承，更简洁易懂
+  class Person {
+    constructor(name, age){
+      this.name = name
+      this.age = age
+    }
+    addAge(){
+      this.age++
+    }
+    setName(name){
+      this.name = name
+    }
+  }
+
+
+
+3. 三目运算符
+let getStudentType = (type) => {
+  let student = type == 1 ? '学神' : type == 2 ? '学霸' : type == 3 ? '学渣' : '学灰'；
+}
+或者使用Object/Map对象
+let getStudentType = (type) => {
+  let obj = {
+    1: '学神'，
+    2: '学霸',
+    3: '学渣',
+    0: '学灰'
+  }
+  let student = obj[type] || obj['0']
+}
+
+let getStudentType = (type) => {
+  let map = new Map([
+    [1, '学神'],
+    [2, '学霸'],
+    [3, '学渣'],
+    [0, '学灰']
+  ])
+  let student = map.get(type) || map.get('0')
+}
+
+
+
+
