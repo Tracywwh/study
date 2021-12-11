@@ -1,0 +1,26 @@
+
+函数式组件：
+import React,{ Component } from 'React';
+import { View } from 'react-native';
+const HelloWorld = () => {
+    return(
+      <View>hello world</View>
+    )
+}
+
+export default HelloWorld;
+
+
+下面是class组件写法，效果一样的。
+
+import React , { Component } from 'React';
+import { View } from 'react-native';
+class HelloWorld extends Component{
+  render(){
+    return (
+      <View>hello world</View>
+    )
+  }
+}
+
+export default HelloWorld;
