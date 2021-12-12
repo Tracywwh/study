@@ -1,0 +1,73 @@
+1. drag和drop 拖拽属性
+<p draggable="true" ondragstart="触发后的函数drag(event)" >这行段落可以被拖拽</p>
+
+
+2. 正则表达式
+<input type="email" pattern="[^@]*@[^@]" value="" />
+
+
+3. 数据列表元素
+<form action="xxx" method="post" >
+  <input list="jslib" name="jslib">
+  <datalist id="jslib">
+      <option value="1">
+      <option value="2">
+  </datalist>
+</form>
+
+
+4. 下载属性
+<a href="" download="xxx.pdf" >下载pdf文件</a>
+
+
+5. DNS的预加载处理
+<link rel="dns-prefetch" href="xxxx" >
+
+6. 链接网页的预加载处理
+<link rel="prefetch" href="xxx" />
+
+
+7. 语义化标签
+<header> <nav> <article> <section> <aside> <footer> <details> 
+<figure> <main> <mark> <time>
+
+
+8. 增加了表单的特性
+type=color / date / datetime / month / week / time / number / url / tel / search / range 
+
+
+9. keygen 提供用户验证的可靠方法，生成一个公钥和私钥
+meter  刻度值，用于温度、重量的计量
+progress  进度条
+
+
+10. 表单内的属性
+placeholder  默认值
+required    要求输入的内容是否可为空
+pattern   正则表达式公式
+min/max
+step   为输入域规定合法的数字间隔
+width/ height
+autofocus 
+multiple  可选择多个值
+
+
+11. audio , video 音频和视频
+
+
+12. svg 矢量绘图
+
+13. canvas 绘图
+
+14. websocket 双工通信机制
+
+15. webstorage 本地储存缓存： 拥有5m的储存容量
+cookie：4k的储存容量
+localStorage: 没有时间限制的数据储存
+sessionStorage： 在浏览器关闭后就会清除
+ 
+
+
+
+
+
