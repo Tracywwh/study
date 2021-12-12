@@ -1,0 +1,32 @@
+一、 js引擎的执行过程：（地址：https://heyingye.github.io/2018/03/19/js%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89/ ）
+
+语法解析   =》   预编译阶段    =》   执行阶段
+ 
+语法错误时，直接抛出错误提示，不会继续向下解析。
+语法正确，则进行编译，编译要考虑所处环境（全局环境，函数环境，eval不推荐使用：有安全、性能等问题），最后进行执行。
+
+
+eg： 
+<script>
+    console.log(fun);            => 打印出1 ： 没有fun函数， err 直接报错，不继续解析person了！！
+    console.log(person);
+</script>
+<script>
+    console.log(person);         =》 打印出2:  undefined : 变量提升，person定义了，但未读取到定义的量
+    console.log(fun);            =》 打印出3:  function fun() {......} 打印出整个fun()函数
+    var person = 'Tracy';
+    console.log(person)          =》 打印出4: ‘Tracy’
+    
+    function fun(){
+      console.log(person);       =》 打印出5: undefined？？ 这里不太明白，person不是全局定义了吗。
+      var person = 'Jone';
+      console.log(person)        =》 打印出6: 'Jone'  函数内重新定义了
+    }
+    fun()                  =》开始执行fun函数
+    console.log(person)          =〉 打印出7: ‘Tracy’  取的全局的变量
+</script>
+
+
+
+
+
