@@ -5,6 +5,8 @@ null,
 undefined,
 boolean,
 object =》[],{} 
+Symbol,
+bigInt
 
 
 隐式转换：
