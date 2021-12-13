@@ -18,7 +18,7 @@ eg：
     console.log(person)          =》 打印出4: ‘Tracy’
     
     function fun(){
-      console.log(person);       =》 打印出5: undefined？？ 这里不太明白，person不是全局定义了吗。
+      console.log(person);       =》 打印出5: undefined？？ 这里不太明白，person不是全局定义了吗。因为函数内又定义了person，这个函数内person变量提升，就变成undefined了
       var person = 'Jone';
       console.log(person)        =》 打印出6: 'Jone'  函数内重新定义了
     }
