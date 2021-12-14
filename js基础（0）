@@ -25,6 +25,36 @@ null == undefined
 
 
 
+赋值
+基本数据类型：是保存在栈中的，赋值后，两个变量互不影响
+引用数据类型：是保存在堆中的（对象），是先从栈中获取数据地址，找到对应堆中获取数据，赋值后，两个变量具有相同的地址，所以是指向同一个对象，相互之间有影响
+
+
+一、 浅拷贝
+浅拷贝只拷贝了基本类型值，以及第一层的引用类型地址
+Object.assign()；{...a}；slice()
+实现浅拷贝的方式：
+写法一： let a = { name:'', book:{ title:'', price: ''} } 
+let b = Object.assign({}, a)
+a中的基本类型name改变的，b中的name不变； a中的book中的对象改变，b中的book对象也改变。
+写法二： let b = {...a}   效果与写法一一致
+写法三： Array.prototype.slice() 
+
+
+二、 深拷贝
+深拷贝会拷贝所有的属性，两个变量至此毫无关系，变更都互不影响。
+实现深拷贝的方式：
+JSON.parse(JSON.stringify(object))； Jquery.extend();  lodash.cloneDeep()
+
+深拷贝会忽略以下几个问题：
+undefined； symbol； 序列化函数； 循环引用的对象； new Date（）； 正则
+
+
+
+
+
+
+
 
 
 
