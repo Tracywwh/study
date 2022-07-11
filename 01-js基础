@@ -146,6 +146,33 @@ better-scroll 就是单例模式
 
 
 
+原型
+
+执行函数定义和执行函数的区别？
+// 函数定义（函数声明和函数表达式）
+// 执行函数定义
+function f1(){    //f1是函数，函数名，引用变量
+  console.log('f1是函数')
+}
+//执行函数
+f1() // 函数的调用————执行函数
+
+原型是什么： 原型就是对象，js中原型一共有2个，prototype(显示)和_proto_（隐式）属性（实例对象有隐式原型）
+原型什么时候产生的？
+执行函数定义的时候，prototype显示原型就创建出来了，由于函数本身也是对象（实例对象），里面的隐式原型_proto_也产生了。
+原型的理解：实例的_proto_与对应函数的prototype都指向原型对象，1. 函数里存在显示原型，实例对象里存在隐式原型
+原型的作用：1. 共享数据，节省空间
+function Person(name){
+  this.name=name
+  this.eat=function(){ console.log('我喜欢吃') } // 这赋值方式是挂在实例上的。浪费内存空间
+} 
+var P1= new Person('小明')
+var P2= new Person('小红')
+小明和小红都会有一个各自的eat方法。重复，浪费内存
+应该把eat挂在原型上。 Person.prototype.eat =function(){ ... } // 节省内存空间
+
+
+通过改变原型执行实现继承
 
 
 
