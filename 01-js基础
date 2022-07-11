@@ -1,0 +1,165 @@
+谈谈你对js的理解？
+a.b的理解。   对象.属性  ==》预解析，作用域，执行上下文环境，闭包，原型
+
+
+什么是变量？
+var num = 10  // num是个地址，num中存的是可修改的值 ———— 变量
+num = 20. // 10所在的空间被20覆盖了。但10这个值是没有变化的
+理解：变量是个容器，容器里的数据是可以改变的
+
+
+什么是常量？
+const obj = {}  //对象/数组是可以改变的，但如果是数字就不能被改变了。
+
+ECMASpcript标准定义了8种数据类型
+1. 7种原始数据类型：String，Number，Boolean，Null，Undefined，Symbol，BigInt
+2. Object
+
+
+引用数据类型：Object，Function， Array，Date，RegExp
+
+typeof运算符 —— 获得当前变量中存储的数据的类型
+返回值：String，Number，Boolean，Undefined，Object，Function
+
+instanceOf运算符： 对象 instanceOf 类型
+
+内存： 用于暂时存放CPU中的运算数据以及与硬盘等外部存储器交换的数据
+
+
+
+
+
+谈谈你对面向对象的理解？
+涉及的内容有： 面向过程；面向对象；对象；原型；引用变量；闭包；作用域；预解析；执行上下文环境
+面向过程还是面向对象都是编程思想；     （简单解释就是： 我饿了，我可以自己洗米做饭切菜下厨；也可以请厨师做饭，我直接吃现成的）
+面向过程：凡事都是亲力亲为，注重的是过程；  
+面向对象：提出需求，抽取出对象，调用对象相关的属性或者方法，获取结果
+面向对象的特性：封装，继承，多态（抽象性）
+对象：具有特征（属性）或者行为（方法）的特指的某个事物。 （看得见，摸得着，具体特质的某个东西。（比如：我面前的电脑显示屏就是对象，但显示屏不是对象，他是大范围。））
+面向对象，需求： 通过手机打电话，分析，分析出里面的对象，具有什么样的特征和一些行为，对象是什么类型的，此时这些都属于分析的（过程）结果，----抽取出对象及特征和行为。
+通过代码实现对象调用对应的属性和方法
+特性 -----》属性；行为 -----〉方法；对象的类型 -----》类（类别）
+构造函数拿上述举例来实现
+eg： function Phone(color,weight){
+  // 手机的对象的特征——》属性
+  this.color = color
+  this.weight = weight
+  // 手机的对象的行为---》方法
+  this.call = function(){
+    console.log("nihao ")
+  }
+}
+// 通过构造函数创建对应的一个具体的对象（实例化对象）
+// 实例化对象的同时进行属性的初始化
+var phone = new Phone('黑色','2kg‘)  // 相当于phone继承了Phone函数属性和方法
+phone.call()
+
+
+1. 字面量的方式创建对象： var obj = {}
+
+2. 工厂模式创建对象: 
+function createObject(name,age){
+  var obj = new Object()
+  obj.name=name
+  obj.age=age
+  return obj
+}
+var obj1 = createObject('小明', 10)
+var obj2 = createObject('小红'，20)
+
+3. 构造函数的方式创建对象
+function Person(name,gender){
+  this.name = name
+  this.gender = gender
+  this.sayHi=function(){
+    console.log('hello')
+  }
+}
+var teacher = new Person('Tracy','女')
+
+4. 通过实例化class创建对象
+ 类的方式创建对象
+class Student{
+  // 构造器,构造器中的属性都在实例对象上的
+  constructor(name,age,gender){
+    this.name = name
+    this.age = age
+    this.gender = gender
+  }
+  // 在原型上
+  sayHi(){
+    console.log(`你好，我是${this.name},今年${this.age}岁了。`)
+  }
+  // class中书写方法的时候，如果方法使用的是赋值（=）符号的方式来定义，那么方法在实例上。
+  // 在实例上
+  eat = () =>{
+    console.log('吃东西啊')
+  }
+  // 在实例上
+  play = function(){
+    console.log('在玩啊')
+  }
+}
+var stu = new Student('小白',20,'男')
+stu.sayHi()
+stu.eat()
+console.log(stu)
+
+那么为什么有的赋值在原型上，有的写在实例上。
+例如构造化函数
+function Person(name){
+  this.name=name
+  this.sayHi=function(){ //在实例上
+    console.log('你好')
+  }
+}
+Person.prototype.eat=function(){ console.log('你好') }.  // 这个是在原型上
+var person1 = new Person('小明')
+var person2 = new Person('小明')
+person1.sayHi === person2.sayHi ? ===>false
+两个对象都有自己的sayHi方法，如果有多个对象，那么就会出现多个对象占用多块空间来存储自己的方法，浪费内存，既然方法中的内容都是一样的，
+那么方法就应该放在原型上，占用一块空间，节省内存！
+
+
+
+单例模式：不管该对象创建多少次，实际上，最终对象只有一个
+简单的单里模式创建对象
+function createObj(){
+  var instance = null
+  return function(name){
+    if(!instance){
+      // 创建对象
+      instance = new Object()
+      // 创建对象的属性值
+      instance.name = name
+    }
+  // instance对象 已经创建完毕了，此时是存在的
+  return instance
+  }
+}
+var getObj = createObj()
+var obj3 = getObj('小明')
+var obj4 = getObj('小红')
+console.log(obj3 === obj4) ==> true 因为执行小红的时候，instance已经存在，所以直接返回已经存在的instance，即小明，所以执行了2次，但只有一个对象小明
+// 一个页面中有多个轮播图的效果，如果说此时为了实现轮播图的效果，那么就会创建对应的多个swiper的对象。此时可以使用单里模式的创建只创建一个对象，节省空间。
+better-scroll 就是单例模式
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
