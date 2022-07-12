@@ -147,6 +147,10 @@ better-scroll 就是单例模式
 
 
 原型
+原型的理解：原型什么时候产生，原型有哪些，原型的作用，继承的实现，面向的编程思想
+原型的应用------>vue中的事件总线---》vue中组件的通信的各种方式
+vue.prototype.$bus = new Vue()
+Vue.prototype.$API=API  ------>任意的组件中都可以直接调用api方法，调用接口，发送请求
 
 执行函数定义和执行函数的区别？
 // 函数定义（函数声明和函数表达式）
@@ -161,7 +165,7 @@ f1() // 函数的调用————执行函数
 原型什么时候产生的？
 执行函数定义的时候，prototype显示原型就创建出来了，由于函数本身也是对象（实例对象），里面的隐式原型_proto_也产生了。
 原型的理解：实例的_proto_与对应函数的prototype都指向原型对象，1. 函数里存在显示原型，实例对象里存在隐式原型
-原型的作用：1. 共享数据，节省空间
+原型的作用：1. 共享数据，节省空间. 2. 实现继承
 function Person(name){
   this.name=name
   this.eat=function(){ console.log('我喜欢吃') } // 这赋值方式是挂在实例上的。浪费内存空间
@@ -173,6 +177,60 @@ var P2= new Person('小红')
 
 
 通过改变原型执行实现继承
+function Person(name){
+  this.name = name
+}
+Person.prototype.sayHi=function(){
+  console.log('hello')
+}
+function Student(name,age){
+  // 二选一： 这是方法的继承
+  this.name = name
+  //二选一： 这是属性的继承
+  Person.call(this,name)
+  this.age=age
+}
+// 改变原型实现继承，可以使用父级类别中的方法（方法的继承）
+Student.prototype = new Person() 
+var stu = new Student(‘小明’，20)
+stu.sayHi();
+// 通过改变原型指向实现的是方法的继承，通过借用构造函数的方式实现的是属性的继承，二者结合在一起称为：组合继承 ---常用的继承方式
+
+
+
+对象调用属性
+var obj = {
+  name: 'xiaoming'，  //值是字符串类型
+  age: 12, // 值是数字类型
+  sayHi: function(){  //值是函数类型
+  }
+}
+调用对象的属性
+obj.name; 
+obj['name'];
+var key = 'name'
+obj[key];   ==》undefined  
+obj.key 可以这么书写，不会报错，但意义不大，此时的key是当成属性来使用，结果是undefined，应用：Vue中可使用v-if好于v-show，因为.key可能会报错。
+
+
+js是弱类型语言，申明变量都用var
+js是脚本语言，直接执行
+js是解释性语言，直接解释
+js是动态类型语言，变量在执行的时候才知道具体的类型，对象没有这个属性，点了，就有了
+js是单线程语言，执行的时候按照一定的顺序，之前的代码执行完毕后，后面才执行
+js是基于对象的语言，最终所有的对象都指向了object
+
+
+
+函数自调用
+// js代码中是有可能会调用别人的js文件的，该文件中有可能有这种自动用的函数（）（）
+;(function(){
+})();
+
+
+
+
+
 
 
 
