@@ -228,21 +228,39 @@ js是基于对象的语言，最终所有的对象都指向了object
 })();
 
 
+对象中有_proto_,函数中有prototype，实例对象中_proto_指向的是当前实例对象对应的构造函数中的prototype。
+而每个prototype都是一个对象，所以，内部必然有——proto——，普通函数中的prototype的——proto——指向的都是Object的prototype
+function Fn(){ }
+var obj = {}
+obj._proto_ === Object.prototype      ===> true 
+Fn.prototype._proto_  === Object.protype      ===> true
 
 
 
+原型链：隐式原型和显示原型之间的关系
+var a = 10  // a是变量，值是数字类型，只有引用类型的对象可以点属性或者方法，去使用
+// a是数字类型，但是由于a.b了，a就变成了基本包装类型（引用类型），
+// a是一个对象了，b就是一个属性，但属性没有赋值
+console.log(a.b)    ===> undefined 
+a.b这个表达式中，总结知识点： 数据类型（null/undefined,string/number/boolean）作用域链（局部作用域/全局作用域），预解析
+，执行上下文环境，原型/原型链 ---》及原型相关应用（事件总线）----〉vue技术点
 
 
+function Foo（）{}. // 构造函数
+const f1 = new Foo()
+const f2 = new Foo()
+const o1 = new Object()
+const o2 = {}
+Foo instanceof Object    ==> true
+Foo instanceof Function  ==> true
+Object instanceof Object ==> true
+Function instanceof Function ==> true
+Function instanceof Object ==> true
+Object instanceof Foo  ===> false
+f1 instanceof Function ===> false
+f1 instanceof Object   ===> true
 
-
-
-
-
-
-
-
-
-
+所有函数都是Funtion的实例对象
 
 
 
