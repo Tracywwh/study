@@ -262,6 +262,57 @@ f1 instanceof Object   ===> true
 
 所有函数都是Funtion的实例对象
 
+继承：改变原型指向/借用构造函数/组合/拷贝
+改变原型指向:
+function Fun(){}   
+Fun.prototype.eat = function(){ ... }
+借用构造函数:
+function Foo(name,age){
+  this.name=name
+  this.age= age
+}
+Class类：
+class Person{
+  // 构造器，为了初始化对象中的属性
+  constructor(name,age){
+    this.name = name
+    this.age = age 
+  }
+  eat = function(){ ... }
+  sayHi(){ console.log('你好') }
+}
+class 与extends：
+class Student extends Person{
+  constructor(name,age,gender){
+    // super 相当于.call结构构造函数实现属性的继承
+    super(name,age)
+    this.gender = gender
+  }
+  sayHi(){ console.log('我很好') }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
