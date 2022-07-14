@@ -421,20 +421,198 @@ fn1()  ==> undefined
 闭包
 闭包的理解？闭包什么时候产生的；闭包是啥；为什么有闭包；闭包的优缺点；闭包的应用
 函数之间有嵌套关系，内部函数调用到了外部函数的变量，内部函数在执行该函数定义的时候，此时形成了闭包。
+闭包就是个对象
+
+
+function fn1(){
+  var a = 1     // 这里就形成了闭包，因为fn2函数声明提升；内部函数执行了该函数的执行函数定义
+  function fn2(){
+    a++
+    console.log(a)
+  }
+  return fn2
+}
+var f = fn1()
+f()
+
+
+
+function fn1(){
+  var a = 1  // 因为fn2不能提升，所以在这一步的时候还没有形成闭包
+  var fn2 = function(){ // 函数表达式的声明不能被提升
+    a++
+    console.log(a)
+  }
+  return fn2    // 闭包形成
+}
+var f = fn1()
+f()
+
+泄漏和溢出又什么区别？
+泄漏是它所占的空间没有被及时释放，长时间不释放就会形成溢出
+（举个例子理解一下：a去上厕所，占着茅坑不拉屎，这个坑位属于泄漏，但所有坑位都遇到a这样的人，导致坑位不够用，有人在排队了，则形成溢出）
+
+function fn1(){
+  var a = 1
+  var fn2 = function(){     // fn2此时是一个引用变量，内部存储的是一个函数对象所在的空间的饭地址
+    a++
+    console.log(a)
+  }
+  return fn2
+}
+var f = fn1()     // f就是一个引用变量，内部存储的地址和fn2引用变量中存储额地址是一样的
+f()  // 此时还没有释放闭包
+f = null // 此时就释放了
+
+优缺点：
+闭包延长了局部变量的生命周期，如果不及时释放会出现内存泄漏
+清除/释放闭包：
+让内部函数对象成为垃圾对象，断开指向它的所有引用
+
+function showDelay(msg,time){
+  setTimeout(()=>{
+    alert(msg) 
+  },1000)
+}
+showDelay()
+clearTimeout()
+
+
+
+this的指向
+1. fun函数，this指向 window
+2. new Fun() ,this 指向 当前的实例对象
+3. obj.fn() 通过对象调用，this指向obj
+4. fn.call/apply(obj)通过函数对象的call/apply来调用， this指向obj
+5. fn.bind(obj) 返回的函数 ，this指向obj
+6. 箭头函数，this指向外部作用域的this
+7. 回调函数
+  定时器/ajax/promise/数组遍历相关方法回调 ===》 this指向window（非严格模式下）；undefined严格模式下
+  vue控制的回调函数， this指向组件的实例
+  react控制的生命周期回调，事件监听回调，this指向组件对象/undefined
+  
+如何控制函数的this？
+1. 利用函数的bind（）
+2. 利用函数箭头 sayHi= () => { this }
+3. 可以用外部保存了this的变量   
+
+var m = 1
+functin f1(){
+  console.log(this.m)
+  return 3
+}
+var obj = { m: 2 }
+f1.bind(obj)    ==> 1 只是复制了一份f1，并没有赋值
+f1（） // 上面只是匿名复制了一份f1函数，跟原f1没有任何关系
+
+但如果 var ff = f1.bind(obj)  //这里将拷贝的f1赋值给了ff。bind中的this指向了obj
+ff（） ===》 2 
+
+console.log(f1.bind(obj)())   => 2 ; 3 
+
+
+// 能够调用bind方法，通过函数对象来调用的bind方法，相当于通过f1函数对象来调用的bind方法，找到了Function的prototype，bind方法在这里
+bind方法是通过函数对象来调用，所有的函数对象都可以去调用bind
+Function.prototype.bind = function(){}     // 方法的封装 ---> 所有的函数对象都可以直接调用
+function bind(){}      //函数的封装 -----> 调用函数实现相关的功能
+
+Function.prototype.bind = function(obj){
+  console.log('mybind')
+  return () => {
+    return this.call(obj)
+  }
+}
+
+var obj2 = {
+  test(){
+    const fn1 = ()=>{
+      console.log('++++',this) // 箭头函数，指向的是当前的实例对象
+    }
+    fn1()
+    const fn2 = function(){
+      console.log('----',this)  // window
+    }
+    fn2（）
+  }
+}
+obj2.test()
 
 
 
 
+同步和异步
+同步就是依次执行；
+异步是可以同时执行。
+进程： 程序的一次执行，它占有一片独有的内存空间
+线程：cpu的基本调度单位，是程序执行的一个完整流程
+js是单线程（从上往下按顺序执行）
+win7系统老ie版本，老版火狐浏览器是单进程，chrome，新版ie，新版火狐是多进程 
+因为浏览器内核不同
+ 
+如何证明js执行是单线程的？
+1. setTimeout()的回调函数实在主线程执行的
+settimeout(()=>{
+},1000)
+2. 定时器回调函数只有在运行栈中的代码全部执行完毕后才有可能执行
+
+为什么js要用单线程模式，而不是多线程模式
+—— js的单线程与它的用途
+—— 作为浏览器脚本语言，js的主要用途是与用户互动，以及操作dom
+—— 这决定了它智能是单线程，否则会带来很复杂的同步问题
+
+//异步回调
+setTimeout(()=>{
+  console.log(1)   //宏任务
+},0)
+console.log(2)  //主线程代码
+Promise.resolve(1).then(()=>{
+  console.log(3) //微任务
+})
+console.log(4)  //主线程代码
+
+执行后结果为： 2，4，3，1
+同步会阻塞代码执行，异步不会
+为什么会这样运行？ js初始化同步代码，微队列，宏队列
+队列的本质就是数组
+宏队列： 用来保存n个宏任务的队列容器
+微队列：用来保存n个微任务的队列容器
+任务的本质就是回调
+宏任务：setTimeout,setInterval,Ajax,DOM事件监听
+微任务：Promise，async/await，mutationobserver(h5)
 
 
+页面第一次渲染的时候到底是怎么执行的？
+先执行的是初始化同步代码，再微队列中的所有微任务，然后渲染界面，最后执行宏队列的第一个宏任务
+界面更新渲染： 所有的微任务 ==> 渲染界面 ===> 执行第一个宏任务（任务就是回调）
 
 
+  事件轮询机制：
+  js是单线程的，也确实可以异步执行函数，之所以能做到（浏览器中有辅助它单线程异步执行的分线程管理模块）
+  js是通过事件循环机制来实现js的单线程异步
+  异步要基于回调来实现
+  event loop就是一步回调的实现原理
+  
+  谈谈你对js的看法？js是单进程的嘛？可以执行异步操作嘛？
+  js是单线程的，都是同步的去执行，但也可以进行异步操作。因为js中有事件轮询机制。
+  
+延时定时器的时间。
+setTimeout(()=>{   // 宏任务
+  console.log('1')
+},1000)
+for( let i =0; i<1000, i++){    // 执行同步代码
+   console.log('这里会打印1000次这句话后，再执行settimeout')
+}
+
+在settimeout后加上for循环，延时了定时器的时间。
+
+for循环放在settimeout的上面，是根据执行步骤的顺序来，先执行for，循环完成后执行settimeout
+for循环在settimeout的后面，则settimeout回调已经在队列中了，但先不执行，因为是宏任务，等for完成执行后再执行。
+两者是不一样的。
+
+定时器的函数内不要放大量代码，会不准确，会阻塞。
 
 
-
-
-
-
+Promise
 
 
 
