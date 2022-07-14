@@ -613,14 +613,125 @@ for循环在settimeout的后面，则settimeout回调已经在队列中了，但
 
 
 Promise
+es6推出的心的更好的异步编程解决方案（相当于纯回调的方式）
+  *可以异步操作启动后或完成后，再制定回调函数得到异步结果数据
+  *解决嵌套回调的回调地狱问题 --- promise链式调用
+promise的then（）的理解
+ - then()总是返回一个新的promise
+ — 新promise的结果状态由then指定的回调函数执行的结果决定
+   1. 抛出错误
+   2. 返回失败的promise
+   3. 返回成功的promise
+   4. 返回其他任何值
+promise对象有3种状态： pending； resolved/fulfilled;   rejected
+promise状态的2种变化： pending --> resolved; pending ---> rejected 变化是不可逆的
+promise.all([promise1, promise2, promise3]).then( ()=> 发送异步请求)
+ - 批量/一次性发送多个请求
+ - 当都成功时，返回的promise才成功
+ - 一旦有一个失败的，返回的promise就失败了
+ 
+
+async/await 与promise的关系
+  async/await是消灭异步回调的终极武器
+  作用：简化promise对象的使用，不用再then/catch来指定回调函数
+  但和promise并不互斥
+      *反而，两者相辅相成
+      *执行async函数，返回promise对象
+      *await相当于promise的then
+      *try。。。catch可捕获异常，相当于promise的catch
+
+async function f1(){}
+var p = f1()
+console.log(p)     => 成功的promise
 
 
+ES6
+什么时候发布的：2015年发布的
+js包含3个部分：
+  1. ECMAScript核心（js标准语法）
+  2. 浏览器端的扩展： BOM（浏览器对象模型）；DOM（文档对象模型）
+  3. 服务器端的扩展：Node.js
+
+es5新增的特性： Object.create()
+eg: 
+var person = {
+  name:'小明',
+  sayHi:function(){
+    console.log('你好')
+  }
+}
+// 新创建的stu对象和person对象是继承关系
+}
+var stu = Object.create(person)    // stu.__proto__ ===> person
+console.log(stu.name)
+stu.sayHi()
+
+es5新增的特性：Object.defineProperties(object,descriptors)
+1. 作用： 为制定对象定义扩展多个属性
+2. get： 用来获取当前属性值的回调函数
+3. set：修改当前属性值的触发的回调函数，并且实参为修改后的值
+4. 存储器属性： setter，getter一个用来存值，一个用来取值
+    对象本身有两个方法：getpropertyName(){} 用来得到当前属性值的回调函数
+                     setpropertyName(){} 用来监视当前属性值变化的回调函数
 
 
+es5新增的特性：Array的方法扩展
+    Array.prototype.indexof(value): 得到数组种的某个数据的第一个下标，用来找数据的
+    Array.prototype.lastIndexOf(value): 得到数组种某个数据的最后一个下标
+    Array.prototype.forEach(function(item,index){}): 遍历数组
+    Array.prototype.map(function(item,index){})：遍历数组，返回新数组
+    Array.prototype.filter(function(item,index){}):遍历过滤后的数组
 
 
+es6新增的特性：
+1. 箭头函数： 
+   定义匿名函数；函数体不用大括号：默认有返回结果；使用场景：多用来定义回调函数
+   特点： 简洁；箭头函数的this不是调用的时候决定的，而是在定义的时候处在自己对象就是它的this
+    没有大括号的时候默认有返回值，有大括号就要手动return
+    
+2. 三点运算符：...
+   打包和拆包
+   
+3. 形参默认值：function f1( name='Tracy',age=20){}
+4. Symbol
+5. iterator 是一种接口机制，为各种不同的数据结构提供统一的访问机制
+6. generator函数
+7. async函数是generator函数的语法糖
+8. 字符串的扩展：
+    includes(str); startsWith（str）判断是否以指定字符串开头;repeat(count)重复指定的次数
+ 9. 二进制与八进制表达法： Number.isFinite(i)
+ 10. 数组扩展：
+      Array.from(伪数组) 伪数组转真数组
+      Array.of(val1,val2,val3)讲一些列数值转换为数组
+      find(回调) 找出第一个满足条件的元素
+ 11. 对象扩展：
+     Object.is(v1,v2)
+     Object.assign(target,obj1,obj2)将对象的属性复制到目标对象
+ 12. 拷贝数据
+     深拷贝，浅拷贝 
+     无论是深拷贝还是浅拷贝，主要针对的是引用类型的数据。
+     浅拷贝：
+     直接复制给一个变量 var a = b 
+     Object.assign()
+     Array.prototype.concat()
+     Array.prototype.slice()
+     深拷贝： JSON.parse(JSON.stringify())拷贝的数据里不能有函数，处理不了
+13. Set容器： 无序不可重复的多个值的集合体
+14. Map容器
+15. for-of 循环
+16. const/let
+17. class类语法
+18. import('').then(()=>{}) 
+    import返回的是promise对象
 
 
-
-
+es7新增的特性：
+  Array.prototype.includes()
+  
+es8新增的特性：
+ Object.values(对象) 获取对象中所有的属性的值
+ Object.entries(对象) 把对象转数组
+ 
+ es9新增的特性：
+ Promise.finally(()=>{})
 
