@@ -1,0 +1,334 @@
+
+手写call和apply
+1. 先要了解call方法是谁的？作用是什么
+用call的操作
+function f1(x，y){
+  console.log(x+y)
+  console.log('f1函数’，this)
+}
+var obj = { name: '小明'}
+// f1时函数对象，引用变量，f1 时Function的实例对象
+// f1对象中是没有call方法的，通过隐式原型链找到Function的prototype原型对象，该原型对象中有call方法
+console.dir(Function)
+f1.call(obj,10,20)
+
+手写实现call
+// 自己封装的一个函数 ------- 第一个思路
+functin call(obj,...args){
+  if( obj === null || obj === undefined ){
+     obj = obj || window  
+  }
+  // fn中存储的是外部传入进来的f1函数对象
+  obj.tempFn = fn
+  // obj.tempFn(...args)相当于f1（10，20）的返回值 给了result
+  const result = obj.tempFn(...args)
+  // 把上面使用完毕的函数删除了（清理使用后的缓存数据）
+  delete obj.tempFn
+  //把f1函数调用后的结果返回
+  return result
+}
+call(f1,obj,10,20)
+
+// 如果希望自己封装的call方法针对任意的一个函数对象都可以使用，那么应该把call方法封装到Functino的prototype中；
+干掉了Function的prototype原型对象中原有的call方法
+// 自己封装的一个方法 -------- 第二个思路
+Function.prototype.call1 = function(obj,...args){
+  // 判断是否传了obj对象
+  if( obj === null || obj === undefined ){
+      obj = obj || window
+  }
+  // 此时代码能执行到这里，说明是一个对象调用了这个call方法，所以，this就是当前对象，又由于该对象一定是一个函数对象，所以，this是一个函数对象
+  // 把当前的this存储起来（把这个函数存储起来）
+  obj.tempFn = this
+  // 调用这个函数
+  obj.tempFn(...args)
+}
+f1.call1(obj,10,20)
+  
+
+// apply
+f1.apply(obj,[10,20])  // apply的使用
+// 手写实现apply
+function apply(fn, obj, args){
+  if(obj === null || obj === undefined ){
+     obj = obj || window
+  }
+  obj.tempFn = fn
+  const result = obj.tempFn(...args)
+  delete obj.tempFn
+  return result
+}  
+var result2 = apply(f1,obj,[10,20])
+console.log（result2）
+
+
+//手写一个数组的forEach的方法
+Array.prototype.forEach = function(cb){
+  // 此时的this就是数组的实例对象
+  for( var i=0; i<this.length; i++ ){
+      cb(this[i],i) 
+  }
+}
+
+// 所有的数组实际上都是对象，都是Array的实例对象
+var arr= [10,20,30]
+arr.forEach((item,index)=>{      
+  console.log(item,index)
+})
+
+
+  
+ // 手写 bind功能
+ /* 自定义函数对象的bind方法 
+    重要技术： 高阶函数； 闭包； call（）；三点运算符
+ */
+ function bind(fn,obj,...args){
+    if( obj === null || obj === undefined ){
+      obj = obj || window
+    }
+    return function(...args2){
+      return call(fn,obj,...args,...args2)
+    }
+ }
+  
+
+
+函数的节流和防抖
+/*
+    事件频繁触发可能造成的问题？
+      1. 一些浏览器时间：window.onresize, window.mousemove等，触发的频率很高，会造成浏览器性能问题
+      2. 如果向后台发送请求，对服务器造成不必要的压力
+*/
+
+节流： 窗口调整；页面滚动；拖拽功能；抢购疯狂点击
+function throttle(callback,delay){
+  let start = 0;
+  return function(event){
+    console.log('throttle节流事件')
+    // 当前时间
+    const current = Date.now()
+    if( current - start > delay ){
+        callback.call(this,event)
+        // 重置开始时间
+        start = current
+    }
+  }
+}
+
+
+防抖：在规定时间内，只让最后一次生效，前面的不生效。适合多次时间一次响应的情况。
+使用场景：输入框实时搜索联想
+function debounce(callback, delay){
+  return function (event){
+    console.log('debounce防抖事件')
+    if( callback.timeId){
+       clearTimeout(callback.timeId)
+    }
+    // 每隔delay的时间，启动一个心的延迟定时器
+    callback.timeId = setTimeout(()=>{
+      callback.call(this,event)
+      // 如果定时器回调执行了，删除标记
+      delete callback.timeId
+    }, delay)
+  }
+}
+
+
+数组去重：
+1. 利用forEach和indexof，本质是双重遍历，效率差些
+function unique1(array){
+  const arr = []
+  array.foreach(item => {
+    if( arr.indexof(item) == -1 ){
+       arr.push(item)
+    }
+  })
+  return arr
+}
+
+2. 利用forEach+对象容器hasOwnProperty,只需要遍历一次，效率高些
+function unique2(arr){
+   const arr = []
+   const obj = {}
+   array.forEach(item = > {
+      if( !obj.hasOwnProperty(item) ){
+          obj[item] = true
+          arr.push(item)
+      }
+   })
+   return arr
+}
+
+3. from...Set
+function unique3(array){
+  // return Array.from(new Set(array))    // 方法1
+  return [...new Set(array)]     //方法2
+}
+
+
+数组扁平化
+/* 递归一： reduce（）+ concat（） */
+function flatten1( array ){
+  return array.reduce((pre,item)=>{
+    if( Array.isArray(item) && item.some(( cItem => Array.isArray(cItem)))){
+      return pre.concat(flatten1(item))
+    } else {
+      return pre.concat(item)
+    }
+  },[])
+}
+
+/* 方法二： ... + some() + concat()  */
+function flatten2( array ){
+    let arr=[].concat(...array)
+    while( arr.some( item => Array.isArray(item))){
+       arr = [].concat(...arr)
+    }
+    return arr
+}
+
+
+ 
+深拷贝（相关：预解析 =》 闭包 =〉 原型：实现数据共享，节省空间，继承：拷贝继承、组合继承、改变原型指向继承；）
+const obj = {
+  a: {},  // a是属性，该属性的值是个对象
+  b: [],  // b是属性，该属性的值是个数组
+  fn: function(){}  // fn是属性，该属性的值是个函数
+}
+obj.a.c = obj.b     // obj.b -- 数组，赋值给了obj.a.c ----由于js是动态类型的语言，obj.a对象，a对象.c添加了c这个属性
+obj.b[0] = obj.a 
+console.log(obj)
+// 我中有你，你中有我，循环引用。（obj.a{ c: [] c一直在循环}，obj.b也一直在循环）
+
+
+// 浅拷贝，两个引用变量指向的地址是相同的，某个数据变化了，其他的引用变量所指向的这个对象中的数据也会随之改变。
+var obj2 = obj
+console.log(obj2)  
+obj2.a = 10
+console.log(obj.2)   => 10 
+
+乞丐版的深拷贝：
+此方法的缺点： 1. 函数属性会丢失（如果对象中有函数属性，会丢失）  2.循环引用会出错（如上面的obj的例子，就是循环引用属性，这里就会报错）
+function deepClone1(target){
+    return JSON.parse(JSON.stringify(target))
+}
+var obj2 = deepClone1(obj)
+
+
+面试基础版本
+此方法的缺点： 只解决了乞丐版的函数属性丢失问题。还是有循环引用会出错的问题
+function getType(data){   // 获取数据的类型字符串名
+   return Object.prototype.toString.call(data).slice(8,-1). /-1代表最后一位
+   // [object Array] ===> Array [Object Object] ===> Object
+}
+此方法的缺点： 只解决了乞丐版的函数属性丢失问题。还是有循环引用会出错的问题
+function deepClone2(target){
+  const type = getType(target)
+  if( type === 'Object' || type === 'Array" ){
+     const clonetarget = type === 'Array' ? [] : {}
+     for( const key in target ){
+         if( target.hasOwnProperty(key)){
+            clonetarget[key] = deepClone2(target[key])
+         }
+     }
+     return clonetarget
+  }else{
+     return target
+  }
+}
+var obj3 = deepClone2(obj)
+console.log(obj3)
+
+
+面试加强版：解决了循环引用的问题和丢失函数属性的问题
+function deepClone3(target, map = new Map()){
+   const type = getType(target)
+   if( type === 'Object' || type === 'Array' ){
+   // 从map容器取对应的clone对象
+       let cloneTarget = map.get(target)
+       // 如果有，直接返回这个clone对象
+       if( cloneTarget ){
+           return cloneTarget
+       }
+       cloneTarget = type === 'Array' ? [] : {}
+       // 将clone产生的对象保存到map容器
+       map.set(target, clonetarget)
+       for( const key in target ){
+          if( target.hasOwnProperty(key) ){
+             cloneTarget[key] = deepClone3(target[key],map)
+          }
+       }
+       return cloneTarget
+    }else{
+       return target
+    }
+}
+
+
+
+
+new和instance的实现
+/*
+  自定义new工具函数
+  语法： newInstance（Fn,...args）
+  功能： 创建Fn构造函数的实例对象
+  实现： 创建空对象obj，调用Fn指定this为obj，返回obj
+*/
+function newInstance(Fn, ...args){
+   const obj = {}
+   // 执行构造函数
+   const result = Fn.applu(obj, args)  //相当于obj.Fn
+   //如果构造函数执行的结果是对象，返回这个对象
+   if( result instanceof Object){
+      return result
+   }
+   //如果不是，返回新创建的对象
+   obj.__proto__.constructor = Fn  // 让原型对象的构造器属性指向Fn
+   return obj
+}
+
+
+
+字符串处理
+字符串倒序： reverse
+function reverString(){
+   // 三种写法都能实现倒序
+   return str.split('').reverse().join()
+   return [...str].reverse().join('')
+   return Array.from(str).reverse().join()
+}
+
+截取字符串： truncate(str, num) 如果字符串的长度超过了num，截取前面num长度部分，并以。。。结束
+function truncate(str, num){
+   return str.length > num ? str.slice(0,num) + '...' : str
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
