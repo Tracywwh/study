@@ -48,6 +48,16 @@ this.$nextTick(()=>{
    const ulElem = this.$refs.ul1  （对应的是<ul ref="ul1">...</ul>）
    console.log(elElem.childNodes.length)   (能立即获得当前点击后的数据)
 })
+项目中遇到的问题，如何解决的？
+- swiper组件，该组件对象必须要等到页面中的DOM加载完毕后，才可以创建swiper对象，然后轮播图才有效果。
+- 创建swiper对象的代码放在了mounted生命周期中（页面加载完毕了），但是轮播图的数据是异步请求回来的。此时有可能会出现这样的问题：页面加载完毕了，swiper对象也创建完毕了，但是轮播图的数据还
+没有获取到，此时页面中的轮播图效果有可能会失效。那就只能等到轮播图的数据请求完毕后（页面也渲染完了），才能创建swiper对象，才有意义。
+- 通过watch监视的方式来解决该问题，但是也不行，默认件事中的代码是不执行的，只有监视的数据发生了变化，watch才有意义，而且不确定到底是什么时候获取到的响应的数据，不能准确的把控响应数据
+回来的时间，再创建swiper对象。
+- 使用watch+定时器创建swiper对象
+- 最好的方式： watch + nextTick() 中的回调来创建swiper对象，但也有不合适的地方，当前的Vue.nextTick()方法，但要引入vue。组件中如果使用nextTick方法，完全可以使用this.$nextTick()
+(最终使用方法： watch + vm.nextTick() )
+
 
 slot插槽：
 基本使用； 作用域插槽； 具名插槽
@@ -158,6 +168,22 @@ const router = new VueRouter({
 })
 
 
+Vue.set() 响应式数据
+响应式数据： 数据发生了变化，页面会随之进行渲染，此时这样的数据就叫响应式数据
+但使用Vue.set()的话需要引入Vue，麻烦，所以可以使用this.$set()方法，效果功能一样的
+Vue.delete()和this.$delete()方法一样。
+
+还有没有其他方式来添加响应式的数据？
+async mounted(){
+  const result = await this.$API.getTrademark()
+  if( result.code === 200 ){
+     const trademarks = result.data
+     this.trademarks (data中定义的trademarks)= trademarks
+  }
+}
+
+
+
 
 vuex 
 action中放异步；mutation中放同步；
@@ -178,7 +204,9 @@ vuex数据刷新丢失的问题？
 
 
 
-
+封装组件：
+1. 可以直接拿过来用
+2. extend产生一个组件的构造函数： const AddressModel = Vue.extend(组件名)
 
 
 
