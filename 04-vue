@@ -79,6 +79,15 @@ slot-具名插槽
 :is = "component-name" 用法
 需要根据数据，动态渲染的场景。即组件类型不确定
 
+动态添加路由： addRoutes
+router.addRoutes(routes)
+应有场景： 权限
+在异步确定用户的权限路由后，需要动态添加到路由器  
+
+prefetch
+<link href="xxx" rel="prefetch" >  prefetch 预加载
+<link href="xxx" rel="preload" as="style" > preload 预加载
+
 
 异步加载组件：用的时候加载，不用不加载，提升性能
 1. import（）函数；
@@ -114,12 +123,30 @@ export default{
    data(){}
 }
 
-vuex
 
 vue-router
-hash模式(默认)： http://abc.com/#user/10
-h5 history模式： http://abc.com/user/20。用这种的话是不会进入404页面的，都是先进入index.html的。前端要自行配置跳转404页面
+声明式路由： <router-link to="/xxx" replace>xxx</router-link> （标签）
+编程式路由： this.$router.push(location) 或者replace的方式 （js）
+传参方式：
+params 参数： 占位方式 /xxx/:name/:age
+query 参数： 可传可不传 /order/list?page=1
+props： {a:1, b:2 }
+meta：可以传递参数
+遇到的困难： 编程式路由跳转，跳转到当前页面，一直有报错？
+在3.10版本后要promise形式，就是在this.$router.push(location).then().catch(),但也不能每个都这么做，很繁琐，查文档后发现可以在路由器原型对象上重新定义push和replace方法
+
+
+hash模式(默认)： http://abc.com/#user/10     用这种的话是不会进入404页面的，都是先进入index.html的。前端要自行配置跳转404页面
+h5 history模式： http://abc.com/user/20。
 后者需要server端支持，因此无特殊需求可选择前者  
+怎么解决history容易跳入404页面？
+解决方式： 开发环境：webpack中的devServer代理： { historyApiFallback: true }
+生产环境打包： 配置nginx ==》 location / { try $uri // index.html; }  // 所有404的请求都返回到index页面
+
+hash和history内部的原理？
+hash：内部利用的是location对象的hash语法。
+history：内部利用的是history对象的pushState（）和replaceState（） （h5新语法 ）
+
 const User = {...}
 const router = new VueRouter({
     routes: [{
@@ -130,6 +157,24 @@ const router = new VueRouter({
     }]
 })
 
+
+
+vuex 
+action中放异步；mutation中放同步；
+vuex中的mutation可以执行异步操作吗？ 
+1. 可以 ==》 异步更新数据后界面确实会自动更新
+2. 问题 ==〉 vuex的调用工具监视不到mutation中的异步更新，工具记录还是更新前的数据（不对）
+3. 扩展：工具如何积累数据变化？ ==》 每次mutation函数执行完后，立即记录当前的数据 ==〉 在mutation中同时更新state，才能被记录到
+
+vuex中的状态数据的响应的原理？
+1. 创建了一个vm对象
+2. state中的数据都是wm的data数据（是响应式的）
+3. 组件中读取的state数据本质读取的就是data中的数据
+4. 一旦更新了state中的数据，所有用到这个数据的组件就会自动更新
+
+vuex数据刷新丢失的问题？
+1. 绑定事件监听：在卸载前保存当前数据
+2. 在初始时读取保存数据作为状态的初始值
 
 
 
