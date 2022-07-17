@@ -1,0 +1,150 @@
+基础知识 + 【高级特性+原理】 + 【设计+经验】
+
+工具： webpack配置 ； 性能优化； babel 。
+项目设计： 状态设计 ； 组件设计 ； 组件通讯 。
+
+
+vue使用
+*基本使用，组件使用
+*高级特性 —————— 不常用，但体现深度
+*vuex和vue-router使用
+
+/* 文档是备忘录，给会用的人查阅，并不是入门教程 */
+用vue-cli创建项目
+
+指令；插值
+插值、表达式
+指令、动态属性
+v-html：会有xss风险，会覆盖子组件
+computed有缓存，data不变则不会重新计算
+watch如何深度监听？
+watch监听引用类型，拿不到oldVal
+
+
+v-model 自定义的v-model把data做数据双向绑定
+
+v-if + v-else-if +v-else ： 不渲染的，性能好，会重新渲染
+v-show 渲染频繁的，用这个方式，不符合要求的display：none隐藏
+
+
+父子组件： props ； $emit
+组件间通讯-自定义事件
+组件生命周期： 挂载 ==》 更新 ==〉 卸载
+vue高级特性：v-model; $nextTick；slot插槽；动态、异步组件；keep-alive缓存提高性能；mixin;
+ 
+vue组件如何通讯
+ 1. 属性和触发事件的形式
+ 2. 自定义事件
+ 3. vuex的通讯
+ 
+ 
+vue和react都是异步渲染的框架
+data改变之后，DOM不会立即渲染
+$nextTick会在DOM渲染之后被触发，以获取最新DOM节点
+
+// 异步渲染，$nectTick待DOM渲染完再回调
+// 页面渲染时会将data的修改做 整合，多次data修改只会渲染一次
+this.$nextTick(()=>{
+   const ulElem = this.$refs.ul1  （对应的是<ul ref="ul1">...</ul>）
+   console.log(elElem.childNodes.length)   (能立即获得当前点击后的数据)
+})
+
+slot插槽：
+基本使用； 作用域插槽； 具名插槽
+应用：就是父组件中没有内容的时候，子组件中可以用替换值展示。如果父组件中有内容，则子组件中的不展示。
+父组件：<SlotDemo :url="xxx" >{{ textName = 这里为空的时候，子组件的slot内的内容会展示。 }}</SlotDemo>
+子组件SlotDemo中： 
+<a :href="url" > 
+   <slot> 默认内容，即父组件没设置内容时，这里显示,可以是组件 </slot>
+</a>
+
+
+slot-具名插槽
+<!--NameSlot 组件---->
+<div class="container">
+  <header><slot name="footer"></slot></header>
+  <main><slot></slot></main>
+  <footer><slot name="footer"></slot></footer>
+</div>
+
+<NameSlot>
+   // <template #header> 也可以这么写
+   <template v-slot:header><h1>将插入到header slot中</h1></template>
+   <p>将插入到main slot中，即未命名的slot</p>
+   <template v-slot:footer><p>将插入到footer slot中</p></template>
+</NameSlot>
+
+
+动态组件：
+:is = "component-name" 用法
+需要根据数据，动态渲染的场景。即组件类型不确定
+
+
+异步加载组件：用的时候加载，不用不加载，提升性能
+1. import（）函数；
+2. 按需加载，异步加载大组件； 
+按需加载的举例：
+<FormDemo v-if="showFormDemo" />.  // 控制showFormDemo，false的时候不加载，true了加载
+import FormDemo from './FormDemo'   // 这是直接引用组件，直接一起打包的
+export default{
+   compomemts:{
+      FormDemo: () => import('./FormDemo').  //这里就是按需加载组件
+  }
+}
+
+
+keep-alive 缓存组件，vue常见性能优化
+缓存组件； 
+频繁切换，不需要重复渲染
+<keep-alive>
+   // 下面3个组件，当state满足条件后会重新渲染下面的组件，但反复点击反复显示满足条件的组件，会浪费内存，消耗。但组件外加了<keep-alive>就能缓存组件了。keep-alive是vue层级来控制复杂的tab操作的，v-show是样式控制的控制简单的
+   <KeepAliveStageA v-if="state === 'A' " />
+   <KeepAliveStageB v-if="state === 'B' " />
+   <KeepAliveStageC v-if="state === 'C' " /> 
+</keep-alive>
+
+
+mixin
+多个组件有相同的逻辑，抽离出来
+mixin并不是完美的解决方案，会有一些问题
+Vue3提出的compositionAPI能解决这些问题
+import myMixin from './mixin'  
+export default{
+   mixins: [myMixin],  //可以添加多个，会自动合并起来（写一遍，多处引用去使用；如果有多个/他人写的，那么维护会比较困难；可能造成命名冲突；）
+   data(){}
+}
+
+vuex
+
+vue-router
+hash模式(默认)： http://abc.com/#user/10
+h5 history模式： http://abc.com/user/20。用这种的话是不会进入404页面的，都是先进入index.html的。前端要自行配置跳转404页面
+后者需要server端支持，因此无特殊需求可选择前者  
+const User = {...}
+const router = new VueRouter({
+    routes: [{
+       path: '/user/:id', component: User. // :id就是动态路径参数，就是动态路由 
+    },{
+       path: '/feedback',
+       component:()=> import(' ./../component/FeedBack')    //懒加载，跟组件的异步加载一样的。到这个页面后加载这个组件
+    }]
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
