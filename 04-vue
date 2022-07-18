@@ -239,6 +239,84 @@ DOM
 公共组件：该组件需要通过Vue.component()进行注册，任意一个组件中都可以直接使用该组件
 
 
+聊聊你对Vue的理解： 数据劫持；指令；响应式数据；组件的通信；路由
+
+directucves  可以同时注册多个指令
+
+组件间通信：
+props --- 父子组件/子父组件通信
+vue自定义事件 ---- 父子组件
+全局事件总线 ---- 任意组件
+event深入 ； 
+v-model深入 --- 父子组件；
+属性修饰符.sync --- 父子； 
+$attrs与$listeners  ---- 父子;
+vuex ----- 任意组件
+$children与$parent ---- 父子;  
+scope-slot ----- 插槽 父子组件; 
+provide（提供）与inject（注入） ---- 父和子孙组件（爷孙组件直接通信）
+
+
+name： 路由组件，递归组件，必须有name属性
+$refs 可以获取某个标签对象
+$attrs 获取的父级组件传递过来的属性，不包括props接收，class和style
+$listeners 获取父级组件传递过来的事件，native修饰时不要的
+
+事件：
+$on()
+$once() 绑定一次事件
+$off() 解绑事件
+$emit（） 分发事件
+
+生命周期
+$mount（） 挂载
+$nextTick()
+$destory() 销毁
+
+指令： v-text; v-html; v-if; v-show; v-for; v-on; v-model; v-bind; v-slot;
+
+key： 唯一的标识，diff算法 （不要用索引做key，当新添加数据后，原先加的那个值的key就变到新的值上去了。而且用索引的话效率低）
+
+actived()激活状态 和deactived（） 失活状态 ，这两个生命周期要配合着缓存组件使用。
+
+父子组件的生命周期
+beforeCreate  初始化
+created   初始化当前Vue实例的data数据和method方法（数据代理已经结束 ---- Object.defineProperty()原理），数据劫持已经结束
+beforeMount 开始挂载页面（创建虚拟DOM对象，把el中对应html的根节点房子啊虚拟DOM对象容器中，遍历所有的子节点、判断节点时标签还是文本，如果是文本，再看是不是插值，标签中的文本替换。）
+  - child beforeCreate
+  - child created
+  - child beforeMount
+  - child mounted
+mounted   首次渲染
+beforeUpdate
+  - child beforeUpdate
+  - child updated
+updated
+beforeDestroy
+  - child beforeDestroy
+  - child destroyed
+destroyed  销毁
+
+
+vue是个渐进式框架，组件，插值，指令，生命周期，响应数据，组件通信
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
