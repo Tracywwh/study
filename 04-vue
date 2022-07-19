@@ -358,18 +358,55 @@ export default defineComponent({
       console.log('mounted', this)
    },
    setup{       // setup只在初始化的时候执行一次
-     const num = ref(10)      // 如果是const num = 10 的话setup里click事件后不会更新返回num值进行渲染,单纯这样写的话是不是响应式数据，所以用ref，可以响应
+     const num = ref(10)      // 如果是const num = 10 的话setup里click事件后不会更新返回num值进行渲染,单纯这样写的话是不是响应式数据，所以用ref，可以响应。ref值适用于基本类型
      const update = () => {
         num.value += 10     // 修改通过ref的方式定义的数据，需要通过.value属性的方式
        console.log(num)    
        console.log( this )   // ==> undefined，setup在beforeCreate之前就执行了，此时的组件实例还没有创建完毕，所以this是一个undefined
      }
+     // 单纯的obj暴露出去，如果操作更新了obj，就不能响应的
+     const obj = {
+        name: '小白',
+        wife: {
+            name: 'Nicy',
+            age: 18,
+            cars: ['奔驰','宝马','奥迪']
+        }
+     }
+     const user = reactive<any>(obj)    // 通过reactive的方式定义的对象，返回的是Proxy类型的对象数据，可以进行响应
+     const updateName = () =>{
+         user.name += "=="
+         user.gender = "男"   //可以直接添加/删除响应式对象上的属性，也是可以重新渲染的
+         delete user.name
+     }
      return {
        num,
-       update
+       update,
+       user
      }
    }
 })
+
+vue2.x和vue3.0 对于响应式对象添加响应式的属性的区别：
+vue2.x 需要通过Vue.set()方法或者是$set方法添加响应式对象的响应式属性，通过Vue.delete()方法或者$delete删除响应式对象中的响应式属性
+vue3.0 通过reactive的方式定义的响应式的对象后，可以直接添加 或 直接delete删除 响应式对象下的响应式属性
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
