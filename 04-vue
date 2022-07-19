@@ -322,19 +322,54 @@ vue里除了有数据代理外，还有数据劫持。
  ·订阅器/中间人：dep
 
 
+<div @click=“click1”>
+  <div @click=“click2”>click me</div>
+</div>  
+这里click后会因为冒泡机制会触发2个click事件，可以使用 @click.stop="click2" 将事件阻止停在当前事件上
 
 
+vue3 与 vue2
+生命周期的不同；
+vue3 更支持 ts
+性能提升： 打包大小减少41%； 初次渲染快55%，更新渲染快133%； 内存减少54%； 使用Proxy代替defineProperty实现数据响应式； 重写虚拟DOM的实现和tree-shaking（摇树）
+vue2.x中必须要有一对根标签，vue3.0中可以不使用根标签
+新增特性： composition(组合)API
 
+vue3 cli 用脚手架的话vue要4.5.0以上的版本
+两种创建方式：
+1. vue cli脚手架安装
+2. vite 安装： 轻量级快捷启动，不适用于开发环境。
 
-
-
-
-
-
-
-
-
-
+vue2.x版本中是 option API(选项api)：
+export default {
+  data:(){ return {} },    //这是option api形式
+  methods:{ },
+  computed: {}
+}
+vue3.0中是composition API（组合api）
+import { defineComponent, ref } from "vue";   // defineComponent,ref都是vue3新加的特性
+export default defineComponent({
+   name: "Vue3APP",
+   beforeCreate(){
+      console.log(" setup在beforeCreate之前就先执行了")
+   },
+   mounted(){
+      // this ---- Proxy类型的对象 -- 代理对象---组件实例对象
+      console.log('mounted', this)
+   },
+   setup{       // setup只在初始化的时候执行一次
+     const num = ref(10)      // 如果是const num = 10 的话setup里click事件后不会更新返回num值进行渲染,单纯这样写的话是不是响应式数据，所以用ref，可以响应
+     const update = () => {
+        num.value += 10     // 修改通过ref的方式定义的数据，需要通过.value属性的方式
+       console.log(num)    
+       console.log( this )   // ==> undefined，setup在beforeCreate之前就执行了，此时的组件实例还没有创建完毕，所以this是一个undefined
+     }
+     return {
+       num,
+       update
+     }
+   }
+})
 
 
 
