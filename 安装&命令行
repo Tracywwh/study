@@ -52,6 +52,43 @@ typescript优势：
 3. Angular2的开发语言
 
 
+nvm： node版本管理
+安装nvm步骤：
+（https://github.com/nvm-sh/nvm#install--update-script）
+1. cd ~/
+2. git clone https://github.com/nvm-sh/nvm.git .nvm
+3. cd ~/.nvm
+4. git checkout v0.39.1
+5. . ./nvm.sh
+6. touch ~/.bashrc
+7. vim ~/.bashrc
+8. 如下3行内容拷进去
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+最后一步： esc，:wq
 
+nvm命令行：
 
+nvm list：查看当前本机使用 nvm 已安装的nodejs的版本列表
+
+nvm arch：查看当前本机是 32 bit 还是 64 bit
+
+nvm install node@版本号：安装指定版本的 nodejs
+
+nvm install latest：安装最新版本的 nodejs
+
+nvm install 14.15.1：安装 14.15.1 版本的 nodejs
+
+nvm uninstall node@版本号：卸载指定版本的 nodejs
+
+nvm uninstall 14.15.1：卸载 14.15.1 版本的 nodejs
+
+nvm use node@版本号：使用指定版本的 nodejs(该版本是已经安装过后的)
+
+nvm use 14.15.1：使用已安装的 14.15.1 版本的 nodejs
+
+nvm root：查看本机安装的 nvm 的安装目录地址
+
+使用管理员身份打开cmd，然后使用 nvm use 14.15.1使用指定版本的node
 
