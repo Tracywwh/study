@@ -92,6 +92,12 @@ arr.forEach((item,index)=>{
  }
   
 
+call、apply与bind有什么区别？
+
+calll、apply 与 bind 都用于this绑定，但 call、apply 函数在改变this指向的同时还会执行函数；而 bind 函数在改变this后返回一个全新的绑定函数。
+bind 属于硬绑定，返回的绑定函数的this指向不能再通过 bind、apply 或 call 修改，即this被永久绑定；call 与 apply 只适用于当前调用，一次调用后就结束。
+call 和 apply 功能完全相同，但call 从第二个参数后的所有参数都是原函数的参数；而 apply 只接受两个参数，第二个参数必须是数组，该数组包含着原函数的参数列表。
+
 
 函数的节流和防抖
 /*
