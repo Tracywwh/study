@@ -194,6 +194,18 @@ function flatten2( array ){
 }
 
 
+/* 方法三： map + reduce */
+let data = [
+  ["红色","128g", "苹果手机",["iphone","iphone5s","iphone7plus","iphoneX"]],
+  ["南北","两室一厅","128㎡","洋房住宅"],
+  ["小米","白色","智能运动手表","心率血压血氧","来电信息提醒"], 
+  ["官方发售","2020年秋季","篮球","球鞋","品牌直邮"]
+]
+let dataConcat = data.map(item=>item.reduce((a,i)=>`${a} ${i}`))
+
+
+es6 : 一维数组：  data.flat()
+
  
 深拷贝（相关：预解析 =》 闭包 =〉 原型：实现数据共享，节省空间，继承：拷贝继承、组合继承、改变原型指向继承；）
 const obj = {
