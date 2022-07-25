@@ -11,6 +11,13 @@ num = 20. // 10所在的空间被20覆盖了。但10这个值是没有变化的
 什么是常量？
 const obj = {}  //对象/数组是可以改变的，但如果是数字就不能被改变了。
 
+const a 
+console.log(a)   => undefined； const/let 变量可提升，但不能取得值。  
+a = 100  
+
+console.log(b)    => err; const/let虽然变量可提升，但不允许直接这么用。不同于var的undefined
+const b = 200 
+
 ECMASpcript标准定义了8种数据类型
 1. 7种原始数据类型：String，Number，Boolean，Null，Undefined，Symbol，BigInt
 2. Object
