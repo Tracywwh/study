@@ -87,6 +87,36 @@ num.has(3) => false
 let set = ['red','blue']
 
 
+多维数组扁平化：
+let arr = [1,2,3,[44,55,[100,110,120],66],7,8,]
+arr.flat(Infinity);
+
+let data = [
+  ["红色","128g", "苹果手机",["iphone5","iphone7plus","iphoneX",["ios7","ios11"]]],
+  ["南北","两室一厅","128㎡","洋房住宅"],
+  ["小米","白色","智能运动手表","心率血压血氧","来电信息提醒"], 
+  ["官方发售","2020年秋季","篮球","球鞋","品牌直邮"]
+]
+let dataConcat = data.map(item=>item.reduce((a,i)=>`${a} ${i}`))
+
+
+二维扁平化
+let data = [[3, 4, 5], [2, 5, 3], [4, 5, 6]]
+1. let b = data.reduce((singleArr, nextArray) => singleArr.concat(nextArray), [])
+2. [].concat(...data)
+3. data.flat()
+
+
+reduce还可以反转字符串
+let arr = [...'你好，我是Tracy']
+1. arr.reduce((pre,cur) => cur+pre)      => 'ycarT是我，好你'
+2. arr.reverse().join('')
+
+
+
+
+
+
 
 
 
