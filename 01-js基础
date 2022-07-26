@@ -587,6 +587,9 @@ console.log(4)  //主线程代码
 宏任务：setTimeout,setInterval,Ajax,DOM事件监听
 微任务：Promise，async/await，mutationobserver(h5)
 
+js引擎发起的任务是微观任务
+宿主发起的任务是宏观任务
+
 
 页面第一次渲染的时候到底是怎么执行的？
 先执行的是初始化同步代码，再微队列中的所有微任务，然后渲染界面，最后执行宏队列的第一个宏任务
