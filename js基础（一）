@@ -28,6 +28,22 @@ Array.isArray(a) => true
 
 a instanceof Array => true
 
+Array(3)  => [empty*3]
+Array(3,4)  => [3,4]
+new Array(3)   => [empty*3]
+new Array(3,4)  => [3,4]
+Array.of(3)     => [3]
+Array.of(3,4)   => [3,4]
+
+Array用不用new，效果都是一样的，
+Array的参数是一个时，表示数组的长度，值为空。参数是多位时，表示数组的每一项
+Array.of的参数是数组的每一项
+
+生成【1-100】的数组
+const arr = new Array(100).fill(0).map((i,v) => v+1)
+const arr = [...Array(100).keys()]  [0~99]
+const arr = Array.from(Array(100),(v,k) => k+ 1)
+
 
 排序方式：
 function compare(a,b){
